@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SYNTHETIC // APPLE WATCH ULTRA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#0e0e0e",
+              "background": "#0e0e0e",
+              "primary": "#ff89ab",
+              "primary-container": "#ff709e",
+              "secondary": "#00e3fd",
+              "tertiary": "#aa8aff",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#ffffff",
+              "on-surface-variant": "#ababab",
+              "outline-variant": "#484848",
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #000000; overflow-x: hidden; }
+        .perspective-container { perspective: 2000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .glass-panel {
+            background: rgba(44, 44, 44, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(72, 72, 72, 0.15);
+        }
+        .text-glow-primary { text-shadow: 0 0 10px rgba(255, 137, 171, 0.5); }
+        .text-glow-secondary { text-shadow: 0 0 10px rgba(0, 227, 253, 0.5); }
+        .organic-mask {
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+        .floating-shard {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#000000]/80 backdrop-blur-md bg-gradient-to-b from-[#0e0e0e] to-transparent shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex justify-between items-center px-12 py-8 w-full">
+<div class="text-2xl font-bold tracking-[0.05em] text-[#ff89ab] drop-shadow-[0_0_8px_#ff89ab] font-headline">
+                SYNTHETIC
+            </div>
+<nav class="hidden md:flex items-center gap-12">
+<a class="font-headline tracking-[0.15em] uppercase text-[12px] font-bold text-white/70 hover:text-[#ff89ab]" href="#">HARDWARE</a>
+<a class="font-headline tracking-[0.15em] uppercase text-[12px] font-bold text-white/70 hover:text-[#ff89ab]" href="#">EVOLUTION</a>
+<a class="font-headline tracking-[0.15em] uppercase text-[12px] font-bold text-[#00e3fd] border-b border-[#00e3fd] pb-1" href="#">SPECS</a>
+<a class="font-headline tracking-[0.15em] uppercase text-[12px] font-bold text-white/70 hover:text-[#ff89ab]" href="#">LABS</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[#00e3fd] cursor-pointer">search</span>
+<button class="bg-gradient-to-r from-primary to-primary-container text-white font-headline tracking-[0.15em] uppercase text-[12px] font-bold px-6 py-2 rounded-sm shadow-[0_0_15px_rgba(255,137,171,0.4)] transition-all duration-300">
+                    GET_ULTRA
+                </button>
+</div>
+</div>
+</header>
+<main class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24">
+<!-- Background Decorative Elements -->
+<div class="absolute inset-0 z-0">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-secondary/10 blur-[150px] rounded-full"></div>
+</div>
+<!-- Hero Section Canvas -->
+<div class="perspective-container w-full h-full flex flex-col items-center justify-center relative z-10">
+<!-- Volumetric Fragment Layer -->
+<div class="preserve-3d w-full max-w-6xl relative flex items-center justify-center min-h-[614px]">
+<!-- Floating Crystalline Shards -->
+<div class="floating-shard top-0 left-20 w-32 h-64 bg-secondary/20 organic-mask rotate-12 backdrop-blur-xl border border-secondary/30"></div>
+<div class="floating-shard bottom-10 right-20 w-48 h-32 bg-primary/20 organic-mask -rotate-12 backdrop-blur-xl border border-primary/30"></div>
+<!-- Central Watch Object -->
+<div class="relative transform transition-transform duration-1000 preserve-3d hover:scale-105 flex items-center justify-center">
+<img id="watch-hero-img" alt="Apple Watch Ultra Hero" class="w-[700px] object-contain drop-shadow-[0_0_100px_rgba(0,227,253,0.3)] opacity-100 mix-blend-screen" style="mask-image: radial-gradient(circle, black 65%, transparent 100%); -webkit-mask-image: radial-gradient(circle, black 65%, transparent 100%);" src="C:\Users\rguti\.gemini\antigravity\brain\723c5fa0-e44a-4db7-80a9-56834e489fc0\apple_watch_ultra_synthetic_hero_1774570281492.png"/>
+</div>
+</div>
+<!-- Content Overlay -->
+<div class="absolute inset-0 flex flex-col items-center justify-between py-20 pointer-events-none">
+<!-- Top Labels -->
+<div class="text-center mt-12">
+<div class="font-headline tracking-[0.4em] text-secondary text-xs mb-4">QUANTUM_BIO // TITANIUM_EVO</div>
+<h1 class="font-headline text-6xl md:text-8xl font-extrabold tracking-tighter text-white uppercase italic leading-none drop-shadow-2xl">
+                        WATCH <span class="text-primary text-glow-primary">ULTRA</span>
+</h1>
+</div>
+<!-- Bottom Specs Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-12 w-full max-w-7xl pointer-events-auto">
+<div class="glass-panel p-6 border-l-2 border-primary">
+<div class="font-headline text-[10px] tracking-[0.2em] text-primary mb-2">CHIP_S9_SI_P</div>
+<div class="font-headline text-xl font-bold text-white uppercase">NEURAL_BIO</div>
+<div class="mt-4 h-[1px] w-full bg-gradient-to-r from-primary/50 to-transparent"></div>
+</div>
+<div class="glass-panel p-6 border-l-2 border-secondary">
+<div class="font-headline text-[10px] tracking-[0.2em] text-secondary mb-2">DISPLAY_FIDELITY</div>
+<div class="font-headline text-xl font-bold text-white uppercase">3000_NITS</div>
+<div class="mt-4 h-[1px] w-full bg-gradient-to-r from-secondary/50 to-transparent"></div>
+</div>
+<div class="glass-panel p-6 border-l-2 border-tertiary">
+<div class="font-headline text-[10px] tracking-[0.2em] text-tertiary mb-2">BIO_SYNC</div>
+<div class="font-headline text-xl font-bold text-white">GEN_4_HARDWARE</div>
+<div class="mt-4 h-[1px] w-full bg-gradient-to-r from-tertiary/50 to-transparent"></div>
+</div>
+<div class="glass-panel p-6 border-l-2 border-on-surface-variant">
+<div class="font-headline text-[10px] tracking-[0.2em] text-on-surface-variant mb-2">TITANIUM_FRAME</div>
+<div class="font-headline text-xl font-bold text-white">AEROSPACE_V2</div>
+<div class="mt-4 h-[1px] w-full bg-gradient-to-r from-white/20 to-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Features Section: Bento Grid -->
+<section class="relative z-10 px-12 py-40 max-w-[1440px] mx-auto">
+<div class="grid grid-cols-12 gap-6 h-[800px]">
+<!-- Main Feature -->
+<div class="col-span-12 md:col-span-8 bg-surface-container relative overflow-hidden group">
+<div class="absolute inset-0 opacity-50 transition-transform duration-700 group-hover:scale-110">
+<img alt="Detail" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYNqyk8jXOgT5dPOur3V5FjrqIZBu8KwcAeAj6mOONtdqYJmYvkiBGx1puMmGO_nJUXMVQT36itLbJyOXv4_4U6gT_74TW02OhnNrqOqljWqAHsCo9TGynIP8KYkF5g8bgHxDkyHos_R_Nc9iBGoJk5rrKWXQcDFnu5KTbVLJEwEm5zL2KnrIbLCgQ9Bjj3JZibMGYsfSy1E_sHUW6gMaw1d_MKX2fB_3E1sm-NoiUvsaMr5aGtXDVdnEX61xhJ-a0881mC8VL9rI"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+<div class="absolute bottom-12 left-12">
+<div class="label-sm font-headline tracking-[0.3em] text-secondary mb-4 uppercase">BIOMETRIC_EVOLUTION</div>
+<h2 class="text-4xl font-headline font-bold text-white max-w-md">YOUR BODY AS THE INTERFACE.</h2>
+</div>
+</div>
+<!-- Small Feature 1 -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-high p-12 flex flex-col justify-between border-t border-primary/10">
+<span class="material-symbols-outlined text-primary text-5xl">altitude</span>
+<div>
+<h3 class="font-headline text-2xl font-bold text-white mb-4">DEPTH_MASTER</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed font-body">Sub-aquatic pressure tracking and altitude mapping with surgical precision.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-20 px-12 mt-40">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-[1440px] mx-auto text-white/40">
+<div class="font-headline tracking-[0.15em] uppercase text-[10px]">©2024 SYNTHETIC_CORP</div>
+<div class="flex gap-12 font-headline tracking-[0.15em] uppercase text-[10px]">
+<a href="#" class="hover:text-white transition-colors">TERMINAL</a>
+<a href="#" class="hover:text-white transition-colors">BIO_LINK</a>
+</div>
+</div>
+</footer>
+</body></html>

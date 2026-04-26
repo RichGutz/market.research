@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SYNTHETIC // AIRPODS PRO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#0e0e0e",
+              "background": "#0e0e0e",
+              "primary": "#ff89ab",
+              "primary-container": "#ff709e",
+              "secondary": "#00e3fd",
+              "tertiary": "#aa8aff",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#ffffff",
+              "on-surface-variant": "#ababab",
+              "outline-variant": "#484848",
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #000000; overflow-x: hidden; }
+        .perspective-container { perspective: 2000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .glass-panel {
+            background: rgba(44, 44, 44, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(72, 72, 72, 0.15);
+        }
+        .text-glow-primary { text-shadow: 0 0 10px rgba(255, 137, 171, 0.5); }
+        .text-glow-secondary { text-shadow: 0 0 10px rgba(0, 227, 253, 0.5); }
+        .organic-mask {
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+        .floating-shard {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#000000]/80 backdrop-blur-md bg-gradient-to-b from-[#0e0e0e] to-transparent shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex justify-between items-center px-12 py-8 w-full">
+<div class="text-2xl font-bold tracking-[0.05em] text-[#ff89ab] drop-shadow-[0_0_8px_#ff89ab] font-headline">
+                SYNTHETIC
+            </div>
+<nav class="hidden md:flex items-center gap-12">
+<a class="font-headline tracking-[0.15em] uppercase text-[12px] font-bold text-white/70 hover:text-[#ff89ab]" href="#">HARDWARE</a>
+<a class="font-headline tracking-[0.15em] uppercase text-[12px] font-bold text-white/70 hover:text-[#ff89ab]" href="#">EVOLUTION</a>
+<a class="font-headline tracking-[0.15em] uppercase text-[12px] font-bold text-[#00e3fd] border-b border-[#00e3fd] pb-1" href="#">SPECS</a>
+<a class="font-headline tracking-[0.15em] uppercase text-[12px] font-bold text-white/70 hover:text-[#ff89ab]" href="#">LABS</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[#00e3fd] cursor-pointer">search</span>
+<button class="bg-gradient-to-r from-primary to-primary-container text-white font-headline tracking-[0.15em] uppercase text-[12px] font-bold px-6 py-2 rounded-sm shadow-[0_0_15px_rgba(255,137,171,0.4)] transition-all duration-300">
+                    GET_THE_SOUND
+                </button>
+</div>
+</div>
+</header>
+<main class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24">
+<!-- Background Decorative Elements -->
+<div class="absolute inset-0 z-0">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-secondary/10 blur-[150px] rounded-full"></div>
+</div>
+<!-- Hero Section Canvas -->
+<div class="perspective-container w-full h-full flex flex-col items-center justify-center relative z-10">
+<!-- Volumetric Fragment Layer -->
+<div class="preserve-3d w-full max-w-6xl relative flex items-center justify-center min-h-[614px]">
+<!-- Floating Crystalline Shards -->
+<div class="floating-shard top-0 left-20 w-32 h-64 bg-secondary/20 organic-mask rotate-12 backdrop-blur-xl border border-secondary/30"></div>
+<div class="floating-shard bottom-10 right-20 w-48 h-32 bg-primary/20 organic-mask -rotate-12 backdrop-blur-xl border border-primary/30"></div>
+<!-- Central AirPods Object -->
+<div class="relative transform transition-transform duration-1000 preserve-3d hover:scale-105 flex items-center justify-center">
+<img id="airpods-hero-img" alt="AirPods Pro Hero" class="w-[850px] object-contain drop-shadow-[0_0_100px_rgba(255,255,255,0.2)] opacity-100 mix-blend-screen" style="mask-image: radial-gradient(circle, black 60%, transparent 100%); -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);" src="C:\Users\rguti\.gemini\antigravity\brain\723c5fa0-e44a-4db7-80a9-56834e489fc0\airpods_pro_synthetic_hero_v25_1774570397110.png"/>
+</div>
+</div>
+<!-- Content Overlay -->
+<div class="absolute inset-0 flex flex-col items-center justify-between py-20 pointer-events-none">
+<!-- Top Labels -->
+<div class="text-center mt-12">
+<div class="font-headline tracking-[0.4em] text-secondary text-xs mb-4">ACOUSTIC_CORE // SPATIAL_TRANS</div>
+<h1 class="font-headline text-7xl md:text-9xl font-extrabold tracking-tighter text-white uppercase italic leading-none drop-shadow-2xl">
+                        AIRPODS <span class="text-primary text-glow-primary">PRO</span>
+</h1>
+</div>
+<!-- Bottom Specs Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-12 w-full max-w-7xl pointer-events-auto">
+<div class="glass-panel p-6 border-l-2 border-primary">
+<div class="font-headline text-[10px] tracking-[0.2em] text-primary mb-2">H2_SILICON</div>
+<div class="font-headline text-xl font-bold text-white">NEURAL_AUDIO</div>
+<div class="mt-4 h-[1px] w-full bg-gradient-to-r from-primary/50 to-transparent"></div>
+</div>
+<div class="glass-panel p-6 border-l-2 border-secondary">
+<div class="font-headline text-[10px] tracking-[0.2em] text-secondary mb-2">ANC_FIDELITY</div>
+<div class="font-headline text-xl font-bold text-white uppercase">2X_ISOLATION</div>
+<div class="mt-4 h-[1px] w-full bg-gradient-to-r from-secondary/50 to-transparent"></div>
+</div>
+<div class="glass-panel p-6 border-l-2 border-tertiary">
+<div class="font-headline text-[10px] tracking-[0.2em] text-tertiary mb-2">SPATIAL_SYNC</div>
+<div class="font-headline text-xl font-bold text-white">GEN_2_HARDWARE</div>
+<div class="mt-4 h-[1px] w-full bg-gradient-to-r from-tertiary/50 to-transparent"></div>
+</div>
+<div class="glass-panel p-6 border-l-2 border-on-surface-variant">
+<div class="font-headline text-[10px] tracking-[0.2em] text-on-surface-variant mb-2">BATTERY_CELL</div>
+<div class="font-headline text-xl font-bold text-white">30_HR_EXP</div>
+<div class="mt-4 h-[1px] w-full bg-gradient-to-r from-white/20 to-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-20 px-12 mt-40">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-[1440px] mx-auto text-white/40">
+<div class="font-headline tracking-[0.15em] uppercase text-[10px]">©2024 SYNTHETIC_CORP</div>
+<div class="flex gap-12 font-headline tracking-[0.15em] uppercase text-[10px]">
+<a href="#" class="hover:text-white transition-colors">TERMINAL</a>
+<a href="#" class="hover:text-white transition-colors">AUDIO_BIOS</a>
+</div>
+</div>
+</footer>
+</body></html>

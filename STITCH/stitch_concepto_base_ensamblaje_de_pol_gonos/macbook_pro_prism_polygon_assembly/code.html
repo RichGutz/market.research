@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#26e6ff",
+              "primary-fixed": "#ff709e",
+              "inverse-surface": "#f9f9f9",
+              "surface-tint": "#ff89ab",
+              "on-secondary-fixed": "#003a42",
+              "on-tertiary-fixed": "#1e0053",
+              "on-secondary": "#004d57",
+              "primary": "#ff89ab",
+              "error": "#ff6e84",
+              "on-secondary-fixed-variant": "#005964",
+              "error-dim": "#d73357",
+              "tertiary-fixed": "#bba2ff",
+              "tertiary-container": "#7631fd",
+              "outline": "#757575",
+              "on-error-container": "#ffb2b9",
+              "on-error": "#490013",
+              "on-secondary-container": "#e8fbff",
+              "surface-bright": "#2c2c2c",
+              "surface-container-highest": "#262626",
+              "on-tertiary-fixed-variant": "#4500a9",
+              "primary-container": "#ff709e",
+              "on-background": "#ffffff",
+              "tertiary-dim": "#844eff",
+              "on-surface-variant": "#ababab",
+              "surface-dim": "#0e0e0e",
+              "surface-container-low": "#131313",
+              "on-primary-fixed": "#000000",
+              "primary-dim": "#e30071",
+              "outline-variant": "#484848",
+              "secondary-dim": "#00d4ec",
+              "error-container": "#a70138",
+              "tertiary-fixed-dim": "#af91ff",
+              "background": "#0e0e0e",
+              "tertiary": "#aa8aff",
+              "surface": "#0e0e0e",
+              "secondary-fixed-dim": "#00d7f0",
+              "on-primary": "#62002d",
+              "inverse-on-surface": "#555555",
+              "secondary-container": "#006875",
+              "surface-container": "#191919",
+              "secondary": "#00e3fd",
+              "on-surface": "#ffffff",
+              "surface-container-lowest": "#000000",
+              "on-tertiary-container": "#ffffff",
+              "on-primary-fixed-variant": "#5d002a",
+              "surface-container-high": "#1f1f1f",
+              "on-tertiary": "#270068",
+              "surface-variant": "#262626",
+              "primary-fixed-dim": "#ff5290",
+              "on-primary-container": "#4c0021",
+              "inverse-primary": "#bc005c"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .organic-mask {
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+        .prism-fragment {
+            will-change: transform, opacity;
+            filter: drop-shadow(0 0 8px rgba(0, 227, 253, 0.4));
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(0, 227, 253, 0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .float-slow {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body selection:bg-secondary selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="bg-black/40 backdrop-blur-xl docked full-width top-0 z-50 flex justify-between items-center w-full px-6 py-4 shadow-[0_0_15px_rgba(255,137,171,0.1)] fixed bg-gradient-to-b from-black/20 to-transparent">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#ff89ab]" data-icon="menu">menu</span>
+</div>
+<h1 class="text-2xl font-black tracking-[0.15em] text-[#ff89ab] font-['Space_Grotesk']">SYNTHETIC</h1>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white/70" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</header>
+<main class="pt-24 pb-32 overflow-x-hidden">
+<!-- Hero Section -->
+<section class="px-6 mb-16 relative flex flex-col items-center text-center">
+<div class="mb-4">
+<span class="font-label text-[10px] tracking-[0.2em] uppercase text-secondary font-bold">SPEC_02 // NEXT_GEN_COMPUTING</span>
+</div>
+<h2 class="font-headline text-5xl font-bold tracking-tight bg-gradient-to-r from-white to-secondary bg-clip-text text-transparent mb-6">
+            MacBook Pro
+        </h2>
+<!-- Redesigned Product Visual: Multi-layered Geometric Sculpture -->
+<div class="relative w-full max-w-[400px] aspect-[4/3] flex items-center justify-center mb-8 perspective-1000 float-slow">
+<!-- Glowing Core -->
+<div class="absolute inset-0 bg-secondary/10 blur-[100px] rounded-full"></div>
+<!-- SVG Scuplture Assembly -->
+<svg class="w-full h-full drop-shadow-[0_0_40px_rgba(0,227,253,0.3)]" viewbox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+<!-- Screen Lid Fragments -->
+<polygon class="prism-fragment opacity-90" fill="rgba(0, 100, 130, 0.4)" points="10,10 250,10 250,142 10,142" stroke="rgba(0, 227, 253, 0.6)" stroke-width="0.5"></polygon>
+<polygon class="prism-fragment opacity-80" fill="rgba(0, 80, 110, 0.4)" points="250,10 490,10 490,142 250,142" stroke="rgba(0, 227, 253, 0.5)" stroke-width="0.5"></polygon>
+<polygon class="prism-fragment opacity-95" fill="rgba(0, 60, 90, 0.5)" points="10,142 250,142 250,275 10,275" stroke="rgba(0, 227, 253, 0.4)" stroke-width="0.5"></polygon>
+<polygon class="prism-fragment opacity-90" fill="rgba(0, 50, 80, 0.5)" points="250,142 490,142 490,275 250,275" stroke="rgba(0, 227, 253, 0.3)" stroke-width="0.5"></polygon>
+<!-- Inner Screen Glass -->
+<polygon class="prism-fragment" fill="rgba(10, 10, 15, 0.85)" points="22,22 478,22 478,262 22,262" stroke="rgba(0, 227, 253, 0.2)"></polygon>
+<!-- Base / Keyboard Fragments -->
+<polygon class="prism-fragment" fill="rgba(0, 227, 253, 0.25)" points="0,292 250,292 250,360 0,360" stroke="rgba(0, 227, 253, 0.8)"></polygon>
+<polygon class="prism-fragment" fill="rgba(0, 190, 230, 0.2)" points="250,292 500,292 500,360 250,360" stroke="rgba(0, 227, 253, 0.7)"></polygon>
+<!-- Detail Shards (Cyber Highlights) -->
+<polygon class="prism-fragment" fill="#00e3fd" points="245,26 255,26 254,32 246,32"></polygon>
+<polygon class="prism-fragment opacity-40" fill="rgba(0, 227, 253, 0.15)" points="14,298 486,298 486,322 14,322"></polygon>
+<polygon class="prism-fragment" fill="rgba(0, 227, 253, 0.3)" points="185,332 315,332 310,354 190,354" stroke="#00e3fd" stroke-width="0.5"></polygon>
+<!-- Light Streaks -->
+<line stroke="rgba(0, 227, 253, 0.2)" stroke-width="0.5" x1="10" x2="490" y1="10" y2="275"></line>
+<line stroke="rgba(0, 227, 253, 0.1)" stroke-width="0.5" x1="490" x2="10" y1="10" y2="275"></line>
+</svg>
+<!-- Floating Data Overlay (Style from Text_4) -->
+<div class="absolute top-1/2 -right-2 transform -translate-y-1/2">
+<div class="bg-surface-container/60 backdrop-blur-xl p-3 border-l-2 border-secondary">
+<p class="font-label text-[8px] text-secondary-dim tracking-widest mb-1 uppercase">Prism_Geometry</p>
+<p class="font-headline text-xs font-bold text-white tracking-widest">OBJ_742.SCULPT</p>
+</div>
+</div>
+</div>
+<div class="max-w-xs mb-8">
+<p class="text-on-surface-variant font-light leading-relaxed text-sm">
+                Poder ilimitado envuelto en una arquitectura de cristal líquido. Diseñada para creadores del futuro.
+            </p>
+</div>
+<!-- Primary CTA -->
+<button class="group relative w-full py-5 bg-gradient-to-r from-secondary-container to-secondary rounded-sm overflow-hidden transition-all duration-300 active:scale-95 shadow-[0_0_20px_rgba(0,227,253,0.3)]">
+<span class="relative z-10 font-headline font-bold text-on-secondary-container tracking-[0.2em] text-sm">EXPLORAR PRODUCTO</span>
+<div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+</button>
+</section>
+<!-- Technical Cards Bento Grid -->
+<section class="px-6 grid grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-high p-5 relative overflow-hidden flex flex-col justify-between min-h-[160px] group border border-white/5">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-4xl" data-icon="memory">memory</span>
+</div>
+<div class="relative z-10">
+<p class="font-label text-[9px] text-secondary tracking-[0.2em] mb-2">NEURAL_PROC</p>
+<h3 class="font-headline text-xl font-bold text-white">M3_CHIP_MAX</h3>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5">
+<span class="font-label text-[10px] text-on-surface-variant">40_CORE_GPU</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 w-0 bg-secondary group-hover:w-full transition-all duration-500"></div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-high p-5 relative overflow-hidden flex flex-col justify-between min-h-[160px] group border border-white/5">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-4xl" data-icon="visibility">visibility</span>
+</div>
+<div class="relative z-10">
+<p class="font-label text-[9px] text-primary tracking-[0.2em] mb-2">VISUAL_FIDELITY</p>
+<h3 class="font-headline text-xl font-bold text-white uppercase leading-tight">Liquid Retina</h3>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5">
+<span class="font-label text-[10px] text-on-surface-variant">1600_NITS_PEAK</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
+</div>
+</section>
+<!-- Fragmented Feature Image -->
+<section class="mt-16 px-6">
+<div class="relative h-48 w-full organic-mask overflow-hidden bg-surface-container border border-white/5">
+<img alt="Technical details" class="w-full h-full object-cover mix-blend-overlay opacity-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC04oBdUDFy0qaLuWYaVF7Y9MeX_767dmArfzNFinLI9188JoIQbS_JMjr9zrsPgpcrx0A4pTNpWW4kXE1Py2CZ_eE5uPWVg018q-pUjd7ffJk--bA-NsJdA8taL5xrNevaY-XN2YXIXkoeNbLKtROcxN_bJBzq7PY5lqVCk1GGjmcebDnQd3EHbkGJSeyS6C21K-k-kCYpm4HzVdkyO1k1TwwaJotPsa-PAjg5uHvN87Y8dDXWetjXT-ppk_w9yAbsG2Vft9_8giA"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="text-center px-12">
+<p class="font-headline text-lg font-bold tracking-widest text-white">GEOMETRY_DRIVEN</p>
+<div class="h-[1px] w-full bg-secondary/50 mt-2"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-center pb-8 bg-[#191919]/80 backdrop-blur-2xl">
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-auto rounded-full px-6 py-3 border border-white/10 flex gap-10 items-center bg-black/50">
+<button class="text-[#ff89ab] scale-110 drop-shadow-[0_0_8px_#ff89ab] active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="polyline">polyline</span>
+</button>
+<button class="text-white/30 hover:text-white active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</button>
+<button class="text-white/30 hover:text-white active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="qr_code_2">qr_code_2</span>
+</button>
+<button class="text-white/30 hover:text-white active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="person_4">person_4</span>
+</button>
+</div>
+</nav>
+<!-- Footer for context -->
+<footer class="bg-[#000000] mt-20 border-t border-white/5 w-full py-12">
+<div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-4">
+<p class="font-['Inter'] text-[10px] tracking-[0.2em] uppercase text-white/20">©2024 SYNTHETIC_CORE. ALL_RIGHTS_RESERVED.</p>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[10px] tracking-[0.2em] uppercase text-white/20 hover:text-[#00e3fd] transition-opacity" href="#">MANIFESTO</a>
+<a class="font-['Inter'] text-[10px] tracking-[0.2em] uppercase text-white/20 hover:text-[#00e3fd] transition-opacity" href="#">SPEC_SHEETS</a>
+</div>
+</div>
+</footer>
+</body></html>

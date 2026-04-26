@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechStore — Premium Electronics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-color: #09090b;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 1.5s ease-in-out;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .022) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+    }
+
+    #glow-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      transition: background .9s ease;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100vh;
+      gap: clamp(8px, 1.8vh, 20px);
+    }
+
+    .product-meta {
+      text-align: center;
+      min-height: 68px;
+    }
+
+    .product-label {
+      font-size: clamp(.6rem, 1.4vw, .8rem);
+      font-weight: 400;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .35);
+      margin-bottom: 4px;
+    }
+
+    .product-name {
+      font-size: clamp(1.4rem, 3.8vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -.03em;
+      background: linear-gradient(130deg, #fff 30%, var(--accent, #4fc3f7));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Wrapper: position:relative es clave para el overlay de logos */
+    .svg-wrapper {
+      position: relative;
+      perspective: 900px;
+      cursor: pointer;
+      transition: width .5s ease, height .5s ease;
+    }
+
+    #product-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      will-change: transform;
+      display: block;
+    }
+
+    #product-svg polygon {
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+
+    /* Overlay de logos: se superpone sobre el SVG */
+    #logo-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      /* los logos hijos usarán position:absolute dentro de este div */
+    }
+
+    .price-tag {
+      font-size: clamp(.9rem, 2vw, 1.25rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .price-tag span {
+      color: var(--accent, #4fc3f7);
+      font-weight: 700;
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .2);
+      cursor: pointer;
+      transition: background .3s, box-shadow .3s, transform .3s;
+    }
+
+    .dot.active {
+      background: var(--accent, #4fc3f7);
+      box-shadow: 0 0 12px var(--accent, #4fc3f7);
+      transform: scale(1.3);
+    }
+
+    .hint {
+      font-size: .66rem;
+      letter-spacing: .22em;
+      color: rgba(255, 255, 255, .15);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hint::before,
+    .hint::after {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .arrow-hint {
+      position: fixed;
+      right: 26px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: .22;
+    }
+
+    .arrow-hint button {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, .3);
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── GLASSMORPHISM & LIGHTING ─── */
+    #glass-overlay {
+      position: absolute;
+      inset: -50px;
+      pointer-events: none;
+      backdrop-filter: blur(12px) saturate(120%);
+      -webkit-backdrop-filter: blur(12px) saturate(120%);
+      mix-blend-mode: soft-light;
+      border-radius: 40px;
+      opacity: 0;
+      transition: opacity 1s;
+      z-index: 5;
+    }
+
+    #light-point {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle closest-side, rgba(255, 255, 255, 0.15), transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: overlay;
+      z-index: 6;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+
+    #particles-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      mix-blend-mode: screen;
+    }
+  
+    /* ─── ONLINE STORE VIEW ─── */
+    #store-view {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(20px, 4vw, 50px);
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      overflow-y: auto;
+    }
+
+    .store-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .btn-back {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .btn-back:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+    }
+
+    .store-title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+    }
+
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .card-img-container {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.2);
+    }
+    .card-img-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-store-badge {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: #aaa;
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: -5px;
+    }
+
+    .card-price {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-top: auto;
+    }
+
+    .card-btn {
+      width: 100%;
+      padding: 12px;
+      text-align: center;
+      background: var(--accent);
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 10px;
+      transition: opacity 0.3s;
+    }
+    .card-btn:hover {
+      opacity: 0.8;
+    }
+
+    .store-loader {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 1.2rem;
+      grid-column: 1 / -1;
+      padding: 50px 0;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="glow-bg"></div>
+  <div id="light-point"></div>
+  <div class="hero">
+    <div class="product-meta">
+      <p class="product-label" id="prod-label">Smartphone Premium</p>
+      <h1 class="product-name" id="prod-name">iPhone 16 Pro</h1>
+    </div>
+    <div class="svg-wrapper" id="svg-wrapper" title="Haz clic para explorar">
+      <svg id="product-svg" viewBox="0 0 400 540" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div id="logo-overlay"></div>
+      <div id="particles-container"></div>
+      <div id="glass-overlay"></div>
+    </div>
+    <p class="price-tag" id="prod-price">Desde <span>$999</span></p>
+    <div class="nav-dots">
+      <div class="dot active" data-i="0"></div>
+      <div class="dot" data-i="1"></div>
+      <div class="dot" data-i="2"></div>
+    </div>
+    <p class="hint">Haz clic para explorar</p>
+  </div>
+  <div class="arrow-hint">
+    <button id="btn-prev">▲</button>
+    <button id="btn-next">▼</button>
+  </div>
+
+  
+  <!-- ONLINE STORE VIEW -->
+  <div id="store-view">
+    <div class="store-header">
+      <button class="btn-back" onclick="closeStore()">← Volver al Holograma</button>
+      <div class="store-title" id="store-title">Cargando...</div>
+      <div style="width:100px;"></div> <!-- Spacer -->
+    </div>
+    <div class="store-grid" id="store-grid">
+      <!-- Tarjetas Inyectadas por JS -->
+    </div>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       Logo Apple SVG path — viewBox 0 0 100 120
+       Aproximación del contorno del logo de la manzana mordida
+       ═══════════════════════════════════════════════════════ */
+    const APPLE_D = `
+  M 50,26
+  C 44,26 40,30 35,30
+  C 29,30 23,25 15,25
+  C  7,25  1,32  1,42
+  C  1,62 14,80 25,90
+  C 30,95 35,98 41,98
+  C 46,98 49,95 54,95
+  C 59,95 62,98 67,98
+  C 73,98 78,95 83,90
+  C 94,80 99,62 99,42
+  C 99,32 93,25 85,25
+  C 77,25 71,30 65,30
+  C 59,30 56,26 50,26 Z
+  M 55,12
+  C 55, 7 60, 2 66, 2
+  C 66, 2 67, 9 61,14
+  C 58,16 55,16 55,12 Z
+`;
+
+    /* ═══════════════════════════════════════════════════════
+       LOGOS: HTML que se inyecta en #logo-overlay por producto
+       Posición absoluta dentro del overlay (porcentajes).
+       ═══════════════════════════════════════════════════════ */
+    const LOGO_HTML = [
+
+      // 0 — iPhone: Apple logo centrado sobre la pantalla (~38% top)
+      `<div style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);">
+    <svg viewBox="0 0 100 120" width="28" height="34">
+      <path fill="rgba(255,255,255,0.22)" d="${APPLE_D}"/>
+    </svg>
+  </div>`,
+
+      // 1 — MacBook: Apple logo centrado en la pantalla (~40% top)
+      `<div style="position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);">
+    <svg viewBox="0 0 100 120" width="30" height="36">
+      <path fill="rgba(210,210,210,0.28)" d="${APPLE_D}"/>
+    </svg>
+  </div>`,
+
+      // 2 — PS5: botones geométricos premium en la columna central (~44% top)
+      `<div style="
+      position:absolute;top:44%;left:50%;
+      transform:translate(-50%,-50%);
+      text-align:center;">
+    <svg viewBox="0 0 120 30" width="60" height="15" style="filter: drop-shadow(0 0 6px rgba(100,200,255,0.6));">
+      <polygon points="15,4 25,24 5,24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linejoin="round" />
+      <circle cx="45" cy="15" r="10" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" />
+      <path d="M68,8 L82,22 M68,22 L82,8" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="95" y="5" width="20" height="20" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linejoin="round" />
+    </svg>
+    <div style="color:rgba(255,255,255,0.5);font-size:8px;letter-spacing:4px;margin-top:8px;font-weight:700;font-family:'Inter',sans-serif;">PS5</div>
+  </div>`
+    ];
+
+    /* ═══════════════════════════════════════════════════════
+       PRODUCTOS — 12 polígonos exactos por producto
+       ═══════════════════════════════════════════════════════ */
+    const PRODUCTS = [
+      // ── 0: iPHONE 16 PRO (portrait 400x540) ───────────────
+      {
+        name: 'iPhone 16 Pro', label: 'Smartphone Premium', price: '$999',
+        accent: '#ff2a75', glow: 'rgba(255,42,117,0.4)', shadow: 'rgba(255,42,117,0.6)',
+        bg: '#2d0a1b',
+        vb: '0 0 400 540', ww: 200, wh: 410,
+        shards: [
+          ['108,18 292,18 290,50 110,50', 'rgba(255,42,117,0.85)', 1],
+          ['108,50 122,50 120,432 106,432', 'rgba(220,20,90,0.9)', 1],
+          ['278,50 292,50 294,432 280,432', 'rgba(240,30,105,0.85)', 1],
+          ['106,432 294,432 290,500 110,500', 'rgba(200,10,75,0.95)', 1],
+          ['122,50 200,50 198,241 120,241', 'rgba(30,30,45,0.95)', 1],
+          ['200,50 278,50 280,241 202,241', 'rgba(40,40,60,0.9)', 1],
+          ['120,241 198,241 196,432 118,432', 'rgba(25,25,35,0.95)', 1],
+          ['202,241 280,241 282,432 200,432', 'rgba(35,35,50,0.9)', 1],
+          ['163,28 237,28 234,44 166,44', '#000000', 1],
+          ['215,31 230,31 229,41 216,41', '#0a0a0a', 1],
+          ['220,55 285,55 288,125 217,125', 'rgba(255,80,140,0.7)', 1],
+          ['230,65 250,65 249,85 231,85', 'rgba(0,0,0,0.8)', 1],
+          ['255,65 275,65 274,85 256,85', 'rgba(20,20,30,0.9)', 1],
+          ['242,95 262,95 261,115 243,115', 'rgba(0,0,0,0.8)', 1],
+          ['265,95 275,95 274,105 266,105', '#ff99b5', 1],
+          ['104,80 108,80 106,100 102,100', 'rgba(255,42,117,0.6)', 1],
+          ['102,115 106,115 104,145 100,145', 'rgba(200,20,80,0.7)', 1],
+          ['100,155 104,155 102,185 98,185', 'rgba(200,20,80,0.7)', 1],
+          ['292,125 296,125 298,165 294,165', 'rgba(255,42,117,0.6)', 1],
+          ['180,488 220,488 219,496 181,496', '#000000', 1],
+          ['135,488 165,488 164,494 136,494', 'rgba(255,20,80,0.3)', 1],
+          ['235,488 265,488 264,494 236,494', 'rgba(255,20,80,0.3)', 1],
+          ['122,50 200,50 160,150 122,150', 'rgba(255,255,255,0.15)', 1],
+          ['200,50 278,50 272,110 200,110', 'rgba(255,255,255,0.1)', 1],
+          ['108,18 116,18 114,432 106,432', 'rgba(255,100,150,0.4)', 1],
+          ['284,18 292,18 294,432 286,432', 'rgba(150,10,50,0.5)', 1],
+          ['110,485 290,485 290,500 110,500', 'rgba(100,5,30,0.6)', 1],
+          ['106,60 110,60 109,64 105,64', 'rgba(0,0,0,0.4)', 1],
+          ['291,60 295,60 295,64 291,64', 'rgba(0,0,0,0.4)', 1],
+          ['150,300 250,300 248,350 148,350', 'rgba(255,42,117,0.3)', 1]
+        ]
+      },
+      // ── 1: MacBOOK PRO (landscape 500x380) ────────────────
+      {
+        name: 'MacBook Pro', label: 'Portátil Profesional', price: '$1,299',
+        accent: '#00e5ff', glow: 'rgba(0,229,255,0.3)', shadow: 'rgba(0,229,255,0.5)',
+        bg: '#001b22',
+        vb: '0 0 500 380', ww: 400, wh: 305,
+        shards: [
+          ['10,10 250,10 250,142 10,142', 'rgba(0,200,240,0.85)', 1],
+          ['250,10 490,10 490,142 250,142', 'rgba(0,180,220,0.9)', 1],
+          ['10,142 250,142 250,275 10,275', 'rgba(0,160,200,0.95)', 1],
+          ['250,142 490,142 490,275 250,275', 'rgba(0,140,180,0.9)', 1],
+          ['22,22 250,22 250,148 22,148', 'rgba(10,10,15,0.95)', 1],
+          ['250,22 478,22 478,148 250,148', 'rgba(15,15,20,0.9)', 1],
+          ['22,148 250,148 250,262 22,262', 'rgba(5,5,10,0.95)', 1],
+          ['250,148 478,148 478,262 250,262', 'rgba(10,10,15,0.9)', 1],
+          ['215,22 285,22 283,38 217,38', '#000000', 1],
+          ['245,26 255,26 254,32 246,32', 'rgba(0,229,255,0.3)', 1],
+          ['10,275 490,275 490,292 10,292', 'rgba(0,100,140,0.95)', 1],
+          ['0,292 250,292 250,326 0,326', 'rgba(0,229,255,0.7)', 1],
+          ['250,292 500,292 500,326 250,326', 'rgba(0,190,230,0.8)', 1],
+          ['0,326 250,326 250,360 0,360', 'rgba(0,170,210,0.85)', 1],
+          ['250,326 500,326 500,360 250,360', 'rgba(0,150,190,0.9)', 1],
+          ['14,298 486,298 486,322 14,322', 'rgba(5,15,20,0.9)', 1],
+          ['20,302 240,302 240,318 20,318', 'rgba(0,80,110,0.85)', 1],
+          ['260,302 480,302 480,318 260,318', 'rgba(0,80,110,0.85)', 1],
+          ['245,302 255,302 255,318 245,318', 'rgba(0,120,160,0.9)', 1],
+          ['185,332 250,332 250,354 185,354', 'rgba(0,100,130,0.8)', 1],
+          ['250,332 315,332 315,354 250,354', 'rgba(0,110,140,0.85)', 1],
+          ['0,358 500,358 496,370 4,370', 'rgba(0,50,70,0.9)', 1],
+          ['20,330 60,330 60,352 20,352', 'rgba(0,90,120,0.7)', 1],
+          ['440,330 480,330 480,352 440,352', 'rgba(0,90,120,0.7)', 1],
+          ['50,362 100,362 98,368 52,368', 'rgba(0,30,50,0.8)', 1],
+          ['400,362 450,362 448,368 402,368', 'rgba(0,30,50,0.8)', 1],
+          ['22,22 250,22 150,150 22,150', 'rgba(255,255,255,0.12)', 1],
+          ['250,22 478,22 400,100 250,100', 'rgba(255,255,255,0.08)', 1],
+          ['200,277 300,277 300,290 200,290', 'rgba(0,0,0,0.6)', 1],
+          ['0,292 10,292 10,360 0,360', 'rgba(0,255,255,0.5)', 1]
+        ]
+      },
+      // ── 2: PLAYSTATION 5 (portrait 400x540) ───────────────
+      {
+        name: 'PlayStation 5', label: 'Consola Next-Gen', price: '$499',
+        accent: '#e2f1fc', glow: 'rgba(59,130,246,0.5)', shadow: 'rgba(59,130,246,0.8)',
+        bg: '#030c1f',
+        vb: '0 0 400 540', ww: 230, wh: 420,
+        shards: [
+          ['130,12 200,12 210,42 110,42', 'rgba(220,240,255,0.9)', 1],
+          ['200,12 270,12 290,42 210,42', 'rgba(200,230,255,0.85)', 1],
+          ['175,14 100,30 95,140 174,130', 'rgba(250,250,255,0.95)', 1],
+          ['95,140 22,48 16,270 90,264', 'rgba(240,240,250,0.9)', 1],
+          ['14,272 90,266 84,360 10,368', 'rgba(230,235,245,0.95)', 1],
+          ['84,360 170,258 164,464 80,470', 'rgba(215,225,235,0.9)', 1],
+          ['225,14 300,30 305,140 226,130', 'rgba(245,250,255,0.95)', 1],
+          ['305,140 378,48 384,270 310,264', 'rgba(230,240,250,0.9)', 1],
+          ['310,266 386,272 390,368 316,360', 'rgba(215,225,240,0.95)', 1],
+          ['316,360 230,258 236,464 320,470', 'rgba(200,215,230,0.9)', 1],
+          ['178,10 200,10 202,80 175,80', 'rgba(10,15,30,0.95)', 1],
+          ['200,10 222,10 225,80 202,80', 'rgba(15,20,40,0.9)', 1],
+          ['172,80 200,80 202,256 168,256', 'rgba(20,25,45,0.95)', 1],
+          ['200,80 228,80 232,256 202,256', 'rgba(25,30,50,0.9)', 1],
+          ['166,258 200,258 202,464 162,464', 'rgba(15,20,35,0.95)', 1],
+          ['200,258 234,258 238,464 202,464', 'rgba(20,25,40,0.9)', 1],
+          ['172,14 175,14 174,130 171,130', 'rgba(50,150,255,1)', 1],
+          ['171,132 174,132 168,256 165,256', 'rgba(40,140,255,1)', 1],
+          ['225,14 228,14 229,130 226,130', 'rgba(60,160,255,1)', 1],
+          ['226,132 229,132 235,256 232,256', 'rgba(50,150,255,1)', 1],
+          ['158,464 175,463 172,490 155,490', '#181818', 1],
+          ['175,463 200,462 197,528 172,490', '#151515', 1],
+          ['200,462 225,463 228,490 203,528', '#1a1a1a', 1],
+          ['225,463 242,464 245,490 228,490', '#1c1c1c', 1],
+          ['320,380 390,380 380,480 310,480', 'rgba(150,180,210,0.7)', 1],
+          ['390,380 405,385 395,485 380,480', 'rgba(130,160,190,0.8)', 1],
+          ['395,420 402,420 400,460 393,460', 'rgba(0,20,50,0.8)', 1],
+          ['170,300 180,300 180,305 170,305', 'rgba(50,150,255,0.6)', 1],
+          ['170,315 178,315 178,320 170,320', 'rgba(50,150,255,0.6)', 1],
+          ['210,400 220,400 220,405 210,405', 'rgba(100,180,255,0.7)', 1]
+        ]
+      }
+    ];
+
+    /* ═══════════════════════════════════════════════════════
+       MOTOR
+       ═══════════════════════════════════════════════════════ */
+    let current = 0, locked = false, floatAnim = null;
+    const NS = 30, polys = [];
+    const overlay = () => document.getElementById('logo-overlay');
+
+
+    function spawnParticles(color) {
+      const container = document.getElementById('particles-container');
+      for (let i = 0; i < 40; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.background = color;
+        p.style.boxShadow = `0 0 10px ${color}`;
+
+        // Random shapes
+        if (Math.random() > 0.5) p.style.borderRadius = '0%';
+        container.appendChild(p);
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 80 + Math.random() * 300;
+
+        gsap.to(p, {
+          x: Math.cos(angle) * velocity,
+          y: Math.sin(angle) * velocity,
+          rotation: Math.random() * 360,
+          scale: Math.random() * 3,
+          opacity: 0.8,
+          duration: 0.2 + Math.random() * 0.4,
+          ease: 'power3.out',
+          onComplete: () => {
+            gsap.to(p, {
+              opacity: 0,
+              scale: 0,
+              y: "+=50",
+              duration: 0.6 + Math.random() * 1.2,
+              ease: 'power2.in',
+              onComplete: () => p.remove()
+            });
+          }
+        });
+      }
+    }
+
+    function init() {
+
+      const svg = document.getElementById('product-svg');
+      for (let i = 0; i < NS; i++) {
+        const p = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        p.id = 'sh' + i; svg.appendChild(p); polys.push(p);
+      }
+      applyShards(0); setWrapper(0, false); scatter(); buildIn(true);
+
+      document.getElementById('svg-wrapper').addEventListener('click', openStore);
+      document.getElementById('btn-next').addEventListener('click', () => nav(1));
+      document.getElementById('btn-prev').addEventListener('click', () => nav(-1));
+      document.querySelectorAll('.dot').forEach(d => {
+        d.addEventListener('click', () => { const i = +d.dataset.i; if (i !== current && !locked) goTo(i); });
+      });
+      document.addEventListener('mousemove', onMouse);
+      document.addEventListener('keydown', handleKeydown);
+      setInterval(() => { if (current === 2 && !locked) gsap.to([polys[8], polys[9]], { opacity: .3, duration: .6, ease: 'sine.inOut', yoyo: true, repeat: 1 }); }, 2400);
+    }
+
+    function setWrapper(pi, animate = false) {
+      const p = PRODUCTS[pi];
+      const vh = window.innerHeight, vw = window.innerWidth;
+      const maxH = Math.min(p.wh, vh * .60), maxW = Math.min(p.ww, vw * .82);
+      const ratio = p.ww / p.wh;
+      let fw = maxW, fh = fw / ratio;
+      if (fh > maxH) { fh = maxH; fw = fh * ratio; }
+      const el = document.getElementById('svg-wrapper');
+      document.getElementById('product-svg').setAttribute('viewBox', p.vb);
+      animate ? gsap.to(el, { width: fw, height: fh, duration: .45, ease: 'power2.inOut' })
+        : gsap.set(el, { width: fw, height: fh });
+    }
+
+    function applyShards(pi) {
+      PRODUCTS[pi].shards.forEach((s, i) => {
+        polys[i].setAttribute('points', s[0]);
+        polys[i].setAttribute('fill', s[1]);
+        gsap.set(polys[i], { opacity: s[2] });
+      });
+    }
+
+    function scatter() {
+      polys.forEach((p, i) => {
+        const ang = (i / NS) * Math.PI * 2 + Math.random() * .8;
+        const d = 350 + Math.random() * 180;
+        gsap.set(p, { x: Math.cos(ang) * d, y: Math.sin(ang) * d, rotation: Math.random() * 360 - 180, scale: 0, opacity: 0 });
+      });
+    }
+
+    function buildIn(first = false) {
+      const prod = PRODUCTS[current];
+      const tl = gsap.timeline({
+        onComplete: () => {
+          locked = false; startFloat();
+          // Fade in del logo al terminar el ensamblaje
+          overlay().innerHTML = LOGO_HTML[current];
+          gsap.fromTo(overlay(), { opacity: 0 }, { opacity: 1, duration: .8, ease: 'power2.out' });
+        }
+      });
+      polys.forEach((p, i) => {
+        tl.to(p, {
+          x: 0, y: 0, scale: 1, rotation: 0, opacity: prod.shards[i][2],
+          duration: first ? 1.4 : 1.1, ease: 'expo.out'
+        }, i * .055);
+      });
+      return tl;
+    }
+
+    function scatterOut() {
+      stopFloat();
+      // Primero hace desaparecer el logo
+      gsap.to(overlay(), { opacity: 0, duration: .2 });
+      const tl = gsap.timeline();
+      polys.forEach((p, i) => {
+        const ang = Math.random() * Math.PI * 2, d = 260 + Math.random() * 130;
+        tl.to(p, {
+          x: Math.cos(ang) * d, y: Math.sin(ang) * d,
+          rotation: Math.random() * 500 - 250, scale: .06, opacity: 0,
+          duration: .48, ease: 'power3.in'
+        }, i * .022);
+      });
+      return tl;
+    }
+
+    function nav(dir) { if (!locked) goTo(((current + dir) % 3 + 3) % 3); }
+
+    function goTo(ni) {
+      if (locked || ni === current) return;
+      locked = true;
+
+      const prev = current;
+      current = ni;
+      const prodIn = PRODUCTS[ni];
+
+      stopFloat();
+      gsap.to(overlay(), { opacity: 0, duration: 0.2 });
+      setWrapper(ni, true);
+      updateUI(ni);
+
+      spawnParticles(PRODUCTS[ni].accent);
+      const tl = gsap.timeline({
+        onComplete: () => {
+          locked = false;
+          startFloat();
+          overlay().innerHTML = LOGO_HTML[current];
+          gsap.fromTo(overlay(), { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'power2.out' });
+        }
+      });
+
+      polys.forEach((p, i) => {
+        const targetShard = prodIn.shards[i];
+        const targetCoords = targetShard[0];
+        const targetColor = targetShard[1];
+        const targetOpacity = targetShard[2];
+
+        // Efecto "Caos intermedio"
+        const ang = Math.random() * Math.PI * 2;
+        const d = 120 + Math.random() * 100;
+
+        const polyTl = gsap.timeline();
+
+        // Fase 1: Explosión suave y Morphing simultáneo en vuelo
+        polyTl.to(p, {
+          x: Math.cos(ang) * d,
+          y: Math.sin(ang) * d,
+          rotation: Math.random() * 180 - 90,
+          scale: 0.6 + Math.random() * 0.4,
+          attr: { points: targetCoords },
+          fill: targetColor,
+          opacity: 0.5 + (targetOpacity * 0.5),
+          duration: 0.55,
+          ease: 'power2.out'
+        }, 0);
+
+        // Fase 2: Ensamblaje en la nueva forma con Expo InOut (tecnológico)
+        polyTl.to(p, {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          opacity: targetOpacity,
+          duration: 1.2,
+          ease: 'expo.inOut'
+        });
+
+        tl.add(polyTl, i * 0.035);
+      });
+    }
+
+    
+    // API Configuration
+    const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
+      ? "http://127.0.0.1:8000"
+      : "/api";
+
+    let storeOpen = false;
+
+    function openStore() {
+      if(locked || storeOpen) return;
+      locked = true;
+      storeOpen = true;
+      
+      const p = PRODUCTS[current];
+      
+      // Detener flotacion
+      stopFloat();
+      // Desactivar interacciones flechas y puntos
+      document.removeEventListener('keydown', handleKeydown);
+      
+      // Explosion expansiva de los shards (Species in Pieces)
+      const tl = gsap.timeline({
+        onComplete: () => {
+          locked = false;
+        }
+      });
+      
+      // Ocultar Interfaz 3D Hero
+      gsap.to(['.product-meta', '.price-tag', '.nav-dots', '.hint', '.arrow-hint', '#light-point', '#logo-overlay'], {
+        opacity: 0, duration: 0.4, ease: 'power2.inOut', pointerEvents: 'none'
+      });
+      
+      // Esparce poligonos por fuera de la pantalla violentamente
+      polys.forEach((poly, i) => {
+        const ang = Math.random() * Math.PI * 2;
+        const d = 800 + Math.random() * 600; // Muy lejos out-of-bounds
+        tl.to(poly, {
+          x: Math.cos(ang) * d, 
+          y: Math.sin(ang) * d,
+          rotation: Math.random() * 800 - 400, 
+          scale: 0.2, 
+          opacity: 0,
+          duration: 0.8, 
+          ease: 'power4.in'
+        }, i * .015);
+      });
+      
+      // Fade in de la tienda
+      gsap.to('#store-view', {
+        opacity: 1, duration: 0.8, delay: 0.6, pointerEvents: 'auto'
+      });
+      
+      fetchStoreData(p);
+    }
+
+    function closeStore() {
+      if(locked) return;
+      locked = true;
+      storeOpen = false;
+      
+      // Ocultar Tienda
+      gsap.to('#store-view', {
+        opacity: 0, duration: 0.4, pointerEvents: 'none'
+      });
+      
+      // Re-ensamblar figura
+      buildIn(false);
+      
+      // Mostrar Interfaz 3D Hero
+      gsap.to(['.product-meta', '.price-tag', '.nav-dots', '.hint', '.arrow-hint', '#logo-overlay'], {
+        opacity: 1, duration: 0.8, delay: 0.8, ease: 'power2.out', pointerEvents: 'auto'
+      });
+      
+      document.addEventListener('keydown', handleKeydown);
+    }
+    
+    async function fetchStoreData(productObj) {
+      document.getElementById('store-title').textContent = "Catálogo: " + productObj.name;
+      const grid = document.getElementById('store-grid');
+      grid.innerHTML = '<div class="store-loader"><span class="spinner-inline"></span> Cargando mercado en tiempo real...</div>';
+      
+      try {
+        const res = await fetch(`${API_URL}/market-prices`);
+        if (!res.ok) throw new Error("Error fetching data");
+        const allPrices = await res.json();
+        
+        // Mapeo (ej: PS5 o PlayStation equivalen, MacBook, iPhone)
+        let fCat = productObj.name.split(' ')[0]; // 'iPhone', 'MacBook', 'PlayStation'
+        if(fCat === 'MacBook') fCat = 'Macbook'; // Fix case match con bd
+        if(fCat === 'PlayStation') fCat = 'PlayStation';
+        
+        let filtered = allPrices.filter(p => {
+            if(fCat === 'PlayStation') return p.category === 'PlayStation' || p.category === 'PS5';
+            return p.category === fCat;
+        });
+        
+        // Ordenar Ascendente por precio
+        filtered.sort((a,b) => a.price_pen - b.price_pen);
+        
+        if(filtered.length === 0) {
+           grid.innerHTML = '<div class="store-loader">No hay stock registrado en el mercado local en este momento.</div>';
+           return;
+        }
+
+        grid.innerHTML = '';
+        filtered.forEach(item => {
+           // Fallback image en caso el scraper haya fallado temporalmente en este elemento
+           const imgSrc = item.image_url && item.image_url.trim() !== "" ? item.image_url : 'https://placehold.co/400x400/111/444?text=No+Foto';
+           
+           grid.innerHTML += `
+             <div class="product-card">
+               <div class="card-img-container">
+                 <img src="${imgSrc}" alt="${item.scraped_title}" loading="lazy"/>
+               </div>
+               <span class="card-store-badge">${item.store}</span>
+               <div class="card-title" title="${item.scraped_title}">${item.scraped_title}</div>
+               <div class="card-price">S/ ${item.price_pen.toLocaleString('es-PE', {minimumFractionDigits:2})}</div>
+               <a href="${item.url}" target="_blank" class="card-btn">Ver Oferta</a>
+             </div>
+           `;
+        });
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = '<div class="store-loader">⚠️ Error de conexión con el Backend de APIs. Asegúrate que FastAPI esté corriendo.</div>';
+      }
+    }
+
+    function handleKeydown(e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nav(1);
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') nav(-1);
+    }
+
+    function updateUI(pi) {
+      const p = PRODUCTS[pi];
+      const els = ['#prod-name', '#prod-label', '#prod-price'];
+      gsap.to(els, {
+        opacity: 0, y: -10, duration: .22, onComplete: () => {
+          document.getElementById('prod-name').textContent = p.name;
+          document.getElementById('prod-label').textContent = p.label;
+          document.getElementById('prod-price').innerHTML = `Desde <span>${p.price}</span>`;
+          gsap.to(els, { opacity: 1, y: 0, duration: .34 });
+        }
+      });
+      document.documentElement.style.setProperty('--accent', p.accent);
+      document.documentElement.style.setProperty('--bg-color', p.bg || '#09090b');
+      document.getElementById('glow-bg').style.background =
+        `radial-gradient(ellipse 70% 60% at 50% 52%,${p.glow} 0%,transparent 70%)`;
+      document.getElementById('product-svg').style.filter =
+        `drop-shadow(0 20px 55px ${p.shadow})`;
+      document.querySelectorAll('.dot').forEach((d, i) => {
+        const a = i === pi;
+        d.classList.toggle('active', a);
+        d.style.background = a ? p.accent : 'rgba(255,255,255,.2)';
+        d.style.boxShadow = a ? `0 0 14px ${p.accent}` : 'none';
+      });
+    }
+
+    function startFloat() { floatAnim = gsap.to('#product-svg', { y: -11, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 }); }
+    function stopFloat() { if (floatAnim) { floatAnim.kill(); floatAnim = null; } gsap.to('#product-svg', { y: 0, duration: .3 }); }
+    function onMouse(e) {
+      const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+      const rx = ((e.clientY - cy) / cy) * -9;
+      const ry = ((e.clientX - cx) / cx) * 13;
+
+      gsap.to('#svg-wrapper', { rotateX: rx, rotateY: ry, duration: .85, ease: 'power2.out' });
+
+      // Iluminación dinámica persiguiendo al cursor atenuada
+      gsap.to('#light-point', {
+        x: e.clientX,
+        y: e.clientY,
+        opacity: 0.15,
+        duration: 0.4,
+        ease: 'power2.out'
+      });
+
+      // Ajustar intensidad de Glassmorphism leve según el movimiento
+      const intensity = Math.abs(rx) + Math.abs(ry);
+      gsap.to('#glass-overlay', { opacity: 0.1 + (intensity * 0.02), duration: 0.5 });
+    }
+
+    // Ocultar luz cuando el cursor abandona la ventana
+    document.addEventListener('mouseleave', () => {
+      gsap.to('#light-point', { opacity: 0, duration: 0.8 });
+    });
+
+    init();
+  </script>
+</body>
+
+</html>

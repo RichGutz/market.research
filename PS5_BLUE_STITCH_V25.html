@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SYNTHETIC_V25 // PlayStation 5</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#006875",
+              "on-surface-variant": "#ababab",
+              "surface-tint": "#ff89ab",
+              "on-tertiary-container": "#ffffff",
+              "on-primary": "#62002d",
+              "outline-variant": "#484848",
+              "outline": "#757575",
+              "on-secondary-container": "#e8fbff",
+              "background": "#0e0e0e",
+              "on-secondary": "#004d57",
+              "on-background": "#ffffff",
+              "surface-bright": "#2c2c2c",
+              "primary-container": "#ff709e",
+              "surface-container-lowest": "#000000",
+              "surface-container": "#191919",
+              "primary-fixed-dim": "#ff5290",
+              "on-primary-fixed-variant": "#5d002a",
+              "secondary-fixed": "#26e6ff",
+              "on-tertiary-fixed-variant": "#4500a9",
+              "tertiary-fixed": "#bba2ff",
+              "tertiary-dim": "#844eff",
+              "surface-variant": "#262626",
+              "on-error": "#490013",
+              "inverse-primary": "#bc005c",
+              "inverse-on-surface": "#555555",
+              "on-error-container": "#ffb2b9",
+              "surface-container-low": "#131313",
+              "primary-fixed": "#ff709e",
+              "inverse-surface": "#f9f9f9",
+              "surface-container-highest": "#262626",
+              "tertiary-container": "#7631fd",
+              "surface-container-high": "#1f1f1f",
+              "error": "#ff6e84",
+              "primary": "#ff89ab",
+              "on-tertiary": "#270068",
+              "tertiary-fixed-dim": "#af91ff",
+              "secondary-fixed-dim": "#00d7f0",
+              "secondary-dim": "#00d4ec",
+              "on-secondary-fixed-variant": "#005964",
+              "surface-dim": "#0e0e0e",
+              "on-surface": "#ffffff",
+              "secondary": "#00e3fd",
+              "primary-dim": "#e30071",
+              "error-dim": "#d73357",
+              "error-container": "#a70138",
+              "on-tertiary-fixed": "#1e0053",
+              "on-secondary-fixed": "#003a42",
+              "surface": "#0e0e0e",
+              "on-primary-container": "#4c0021",
+              "on-primary-fixed": "#000000",
+              "tertiary": "#aa8aff",
+              "cobalt": "#004dff"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .liquid-crystal-ray {
+            background: linear-gradient(45deg, transparent 45%, #004dff 50%, transparent 55%);
+            filter: blur(12px);
+            opacity: 0.4;
+        }
+        .bento-mask {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body selection:bg-cobalt selection:text-white overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl shadow-[0_0_15px_rgba(0,227,253,0.1)]">
+<div class="flex justify-between items-center px-8 h-16 w-full max-w-[1920px] mx-auto">
+<div class="text-2xl font-black tracking-tighter text-white hover:text-cyan-400 transition-colors cursor-pointer">
+                SYNTHETIC_V25
+            </div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-['Space_Grotesk'] tracking-[0.05em] uppercase text-xs font-bold" href="#">STORE</a>
+<a class="text-neutral-400 hover:text-white transition-all font-['Space_Grotesk'] tracking-[0.05em] uppercase text-xs font-bold" href="#">LIBRARY</a>
+<a class="text-neutral-400 hover:text-white transition-all font-['Space_Grotesk'] tracking-[0.05em] uppercase text-xs font-bold" href="#">HARDWARE</a>
+<a class="text-neutral-400 hover:text-white transition-all font-['Space_Grotesk'] tracking-[0.05em] uppercase text-xs font-bold" href="#">NEWS</a>
+</div>
+<div class="flex items-center space-x-6">
+<span class="material-symbols-outlined text-white hover:text-cyan-400 cursor-pointer transition-all duration-300" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined text-white hover:text-cyan-400 cursor-pointer transition-all duration-300" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 rounded-full border border-white/20 bg-neutral-800 flex items-center justify-center overflow-hidden">
+<img alt="User Profile Avatar" data-alt="close-up portrait of a digital human avatar with subtle glowing blue circuitry lines on skin, minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvxYNKnvWg2L8kb3oUSAGV2rX1WxM5RiLGkZTyIwwzyPIiQk4c6WzQHMjgU9FSJtE3_9moQowgXvS1QX9TZj99NlpaAt6gm6lEwyARIum_aEmrWEp9bY_n35PG-f31KjoUE7GRRjsYzc5UJxHQR7Myxtc-NcBzm-m9YJaX8UH4x8sqrtgQk0j_cLhSMVkkYZM7WPIT82ub6rjDwLxWVHAX3-tjRjuwsEAYLiqgc2JXYH2DxYfQBRyEqPnJ4wqlOK0M_yeN-DcLPXM"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-8 overflow-hidden">
+<!-- Background Light Rays -->
+<div class="absolute inset-0 z-0">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rotate-45 pointer-events-none">
+<div class="liquid-crystal-ray absolute inset-0"></div>
+<div class="liquid-crystal-ray absolute inset-0 translate-x-12 translate-y-12"></div>
+<div class="liquid-crystal-ray absolute inset-0 -translate-x-24 -translate-y-24 opacity-20"></div>
+</div>
+</div>
+<!-- Main Product Display -->
+<div class="relative z-10 w-full max-w-7xl flex flex-col items-center">
+<div class="absolute top-0 left-0 text-white/10 font-black text-[12rem] select-none tracking-tighter leading-none -translate-x-20 -translate-y-20">
+                PS5
+            </div>
+<div class="flex flex-col items-center text-center space-y-4 mb-12">
+<span class="font-headline tracking-[0.5em] text-cobalt text-sm font-bold uppercase">GAIA_UNIT // NEURAL_GAMING</span>
+<h1 class="font-headline text-7xl md:text-9xl font-black text-white tracking-tighter uppercase">
+                    PlayStation 5
+                </h1>
+</div>
+<div class="relative group">
+<div class="absolute -inset-20 bg-cobalt/10 blur-[120px] rounded-full group-hover:bg-cobalt/20 transition-all duration-1000"></div>
+<img alt="PlayStation 5 Console and DualSense Controller" class="relative z-20 w-full max-w-4xl h-auto drop-shadow-[0_0_50px_rgba(0,77,255,0.3)] transition-transform duration-700 group-hover:scale-105" data-alt="ultra-realistic studio shot of a white PlayStation 5 console standing vertically next to a DualSense controller on a reflective black surface with cobalt blue accent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4O7T8kfiYY1TnCLi6LAUjQqnr5JqKHB-aN8xu-PKM9ZyKvvMWIlvuu1gks9XWah_GOS2xhpmbaVH6JWwvi7dtrFmsHq7kgfyTiYY0OpnXJtpeaMUkg-dluLIDV1yAqa1qylGyywCKTQZadJ45b4YlYWcoGoTfUFnFusgEzPMHEzU-oRXR6np285hmtNvm6Onirz6ReCKfnSgT6gmIeO7C_dRf89Ce4Sl9bqeBj8AN5GUgHW3zy2QLut8-k_jWuVOqm8fK_6-x8sc"/>
+</div>
+<div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
+<div class="flex flex-col items-center">
+<span class="font-headline text-cobalt font-bold text-lg">8K</span>
+<span class="font-label text-neutral-500 uppercase tracking-widest text-[10px] mt-1">Output</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-headline text-cobalt font-bold text-lg">120FPS</span>
+<span class="font-label text-neutral-500 uppercase tracking-widest text-[10px] mt-1">Maximum</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-headline text-cobalt font-bold text-lg">RAY_TRACING</span>
+<span class="font-label text-neutral-500 uppercase tracking-widest text-[10px] mt-1">Simulation</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-headline text-cobalt font-bold text-lg">HDR</span>
+<span class="font-label text-neutral-500 uppercase tracking-widest text-[10px] mt-1">Precision</span>
+</div>
+</div>
+<div class="mt-16 flex space-x-6">
+<button class="bg-gradient-to-r from-cobalt to-blue-700 text-white font-headline font-bold uppercase tracking-widest px-12 py-4 rounded-sm shadow-[0_0_15px_rgba(0,77,255,0.4)] hover:shadow-[0_0_25px_rgba(0,77,255,0.6)] transition-all active:scale-95">
+                    PRE_ORDER_NOW
+                </button>
+<button class="bg-white/5 border border-white/10 backdrop-blur-md text-white font-headline font-bold uppercase tracking-widest px-12 py-4 rounded-sm hover:bg-white/10 transition-all">
+                    EXPLORE_TECH
+                </button>
+</div>
+</div>
+</section>
+<!-- V25 Bento Grid Section -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-[1440px] mx-auto">
+<div class="mb-16 flex justify-between items-end border-l-2 border-cobalt pl-6">
+<div>
+<span class="font-label text-cobalt uppercase tracking-[0.2em] text-xs">SYST_DATA_V25</span>
+<h2 class="font-headline text-4xl font-bold text-white mt-2">TECHNICAL_SPECIFICATION</h2>
+</div>
+<div class="hidden md:block text-right">
+<span class="font-label text-neutral-600 text-[10px] uppercase tracking-tighter">VER_4.02.1 / ARCH_X64</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: HAPTIC_FEEDBACK -->
+<div class="group relative bg-surface-container-high h-[450px] overflow-hidden bento-mask border border-white/5 hover:border-cobalt/30 transition-all duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
+<img alt="DualSense Haptic Technology" class="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-60 transition-all duration-700" data-alt="macro close-up of a controller internal motor gear system with blue neon lighting and sharp technical focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJG-jcuO4F2ukh57BnAJqSp7OntZMqYCwxegJldbcyABS0qvNAO3UYryS5VYgxKsTQHe5NWTLSXmGMsmKwj1NTb-tld2QlzMQ6yIZIyQI8H-gQw-Eg6sgpuNKm2xsrNxw91xf0f_GwCT9kerrH7Aui0OTluFJOAAkrVPD8spo2Zbf5YfT9lIYSdc4c_63h06O8UrAPUV2ux6ZPLfPUHBRdmqwG7uckQej7U1yMPTqmo52GUU_ZMqqSktkODd8YeuLMx8HMoUzCTnA"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 w-full">
+<span class="font-label text-cobalt text-[10px] tracking-widest uppercase mb-2 block">SENSE_UNIT_01</span>
+<h3 class="font-headline text-2xl font-bold text-white tracking-tight">HAPTIC_FEEDBACK</h3>
+<p class="text-neutral-400 text-sm mt-4 font-body leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            Experience tactile resonance through dual actuators which replace traditional rumble motors. Feel everything from environmental effects to the recoil of weapons.
+                        </p>
+<div class="mt-6 flex justify-between items-center">
+<span class="w-12 h-[1px] bg-cobalt"></span>
+<span class="material-symbols-outlined text-cobalt" data-icon="settings_input_antenna">settings_input_antenna</span>
+</div>
+</div>
+</div>
+<!-- Card 2: TEMPEST_3D_AUDIO -->
+<div class="group relative bg-surface-container-high h-[450px] overflow-hidden bento-mask border border-white/5 hover:border-cobalt/30 transition-all duration-500 md:translate-y-12">
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
+<img alt="3D Audio Visualizer" class="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-60 transition-all duration-700" data-alt="abstract 3d sound wave visualization with blue glowing nodes and lines on a dark background technical style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDld8iEiNVA-OypfC3Et9wXxgM-2H0GnXVP4rfQ1nZieCk6UW76lVmLZmoeU6FIe1Dra5rUoLGDf47Ice0CUebIjtc401MLGWPm_9RpPvr6Zt0rTEKrDzvVFTvjZTesYqi2q-giGbMiSomB2jYoAZ7-MFVv-vGgakqNSjXtmwiTuI2w8LSZXsloOcVlri4jIzaLjbiQXCbbSj0MgAY_EZg9HI-Cp6JHj_eV0hh3LZEj88Ptb5IcBJ8AMvSWquXEZlbCJMtIWXw-cnU"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 w-full">
+<span class="font-label text-cobalt text-[10px] tracking-widest uppercase mb-2 block">AURAL_SCAN_02</span>
+<h3 class="font-headline text-2xl font-bold text-white tracking-tight">TEMPEST_3D_AUDIO</h3>
+<p class="text-neutral-400 text-sm mt-4 font-body leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            Immerse yourself in soundscapes where it feels as if the sound comes from every direction. Your surroundings truly come alive with Tempest 3D AudioTech.
+                        </p>
+<div class="mt-6 flex justify-between items-center">
+<span class="w-12 h-[1px] bg-cobalt"></span>
+<span class="material-symbols-outlined text-cobalt" data-icon="spatial_audio_off">spatial_audio_off</span>
+</div>
+</div>
+</div>
+<!-- Card 3: ULTRA-HIGH_SPEED -->
+<div class="group relative bg-surface-container-high h-[450px] overflow-hidden bento-mask border border-white/5 hover:border-cobalt/30 transition-all duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
+<img alt="SSD Speed Visualization" class="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-60 transition-all duration-700" data-alt="high-speed light trails in cobalt blue and white streaks on dark background representing data transfer speeds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7embyqs3icd0VqrFkfXzKJ62CRbr8CJS6geS8zrtcqp62uY2esadBJnhMlZqwDOT95WCipBtbaGKvBzGBEqTZ9XkBjj77XYf9KKfV12SKsxdhNo7A0wDko43RPguUb9DsoXZaLAI0bikNnsAa5KmNDpBwFRcn9Bkjosy_UZno4gqI3WXj12Bvo_a0fYCSX5jVgTXdpUMJwljozdKqx28XcgSn-h7jwNoCvKkFq91ZCcG4JHVoGPjiCJIRNseo5Tsc9QpWU2Ny7Dg"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 w-full">
+<span class="font-label text-cobalt text-[10px] tracking-widest uppercase mb-2 block">DATA_FLOW_03</span>
+<h3 class="font-headline text-2xl font-bold text-white tracking-tight">ULTRA-HIGH_SPEED</h3>
+<p class="text-neutral-400 text-sm mt-4 font-body leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            Maximize your play sessions with near instant load times for installed PS5™ games. Custom SSD architecture pushes the boundaries of performance.
+                        </p>
+<div class="mt-6 flex justify-between items-center">
+<span class="w-12 h-[1px] bg-cobalt"></span>
+<span class="material-symbols-outlined text-cobalt" data-icon="speed">speed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Floating Data Fragments Decoration -->
+<div class="fixed top-1/4 right-8 pointer-events-none hidden xl:flex flex-col space-y-4 opacity-30">
+<div class="bg-white/5 border-l-2 border-cobalt p-2 font-label text-[8px] uppercase tracking-widest text-white">
+            SPEC_01 // CPU_ZEN2
+        </div>
+<div class="bg-white/5 border-l-2 border-cobalt p-2 font-label text-[8px] uppercase tracking-widest text-white">
+            SPEC_02 // RDNA_2.0
+        </div>
+<div class="bg-white/5 border-l-2 border-cobalt p-2 font-label text-[8px] uppercase tracking-widest text-white">
+            SPEC_03 // NVME_SSD
+        </div>
+</div>
+<!-- Footer -->
+<footer class="bg-neutral-950 w-full py-12 px-8 border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-7xl mx-auto">
+<div class="text-lg font-bold text-white font-headline">
+                SYNTHETIC_DIGITAL
+            </div>
+<div class="flex flex-wrap justify-center gap-8 font-['Space_Grotesk'] text-[10px] tracking-[0.15em] uppercase">
+<a class="text-neutral-500 hover:text-cyan-400 underline-offset-4 hover:underline transition-colors duration-200" href="#">PRIVACY_POLICY</a>
+<a class="text-neutral-500 hover:text-cyan-400 underline-offset-4 hover:underline transition-colors duration-200" href="#">TERMS_OF_SERVICE</a>
+<a class="text-neutral-500 hover:text-cyan-400 underline-offset-4 hover:underline transition-colors duration-200" href="#">SUPPORT</a>
+<a class="text-neutral-500 hover:text-cyan-400 underline-offset-4 hover:underline transition-colors duration-200" href="#">LEGAL</a>
+</div>
+<div class="text-neutral-500 font-['Space_Grotesk'] text-[10px] tracking-[0.15em] uppercase text-center md:text-right">
+                © 2024 SYNTHETIC DIGITAL CORP. ALL RIGHTS RESERVED.
+            </div>
+</div>
+</footer>
+</body></html>

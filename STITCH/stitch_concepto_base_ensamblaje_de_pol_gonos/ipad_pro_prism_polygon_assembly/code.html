@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-dim": "#844eff",
+              "surface-variant": "#262626",
+              "surface-tint": "#ff89ab",
+              "primary-dim": "#e30071",
+              "on-primary-container": "#4c0021",
+              "primary-fixed-dim": "#ff5290",
+              "surface-dim": "#0e0e0e",
+              "secondary-fixed": "#26e6ff",
+              "surface-container-low": "#131313",
+              "primary-container": "#ff709e",
+              "error": "#ff6e84",
+              "on-tertiary": "#270068",
+              "surface-container-highest": "#262626",
+              "tertiary-fixed-dim": "#af91ff",
+              "secondary-fixed-dim": "#00d7f0",
+              "on-tertiary-fixed": "#1e0053",
+              "on-primary-fixed-variant": "#5d002a",
+              "on-primary-fixed": "#000000",
+              "inverse-on-surface": "#555555",
+              "on-background": "#ffffff",
+              "on-error-container": "#ffb2b9",
+              "on-secondary-fixed": "#003a42",
+              "on-secondary-fixed-variant": "#005964",
+              "error-container": "#a70138",
+              "background": "#0e0e0e",
+              "outline": "#757575",
+              "tertiary": "#aa8aff",
+              "tertiary-fixed": "#bba2ff",
+              "on-tertiary-container": "#ffffff",
+              "error-dim": "#d73357",
+              "surface-container": "#191919",
+              "primary-fixed": "#ff709e",
+              "surface-bright": "#2c2c2c",
+              "on-secondary": "#004d57",
+              "on-surface": "#ffffff",
+              "primary": "#ff89ab",
+              "tertiary-container": "#7631fd",
+              "inverse-surface": "#f9f9f9",
+              "surface-container-lowest": "#000000",
+              "surface-container-high": "#1f1f1f",
+              "secondary": "#00e3fd",
+              "secondary-dim": "#00d4ec",
+              "on-secondary-container": "#e8fbff",
+              "outline-variant": "#484848",
+              "on-primary": "#62002d",
+              "secondary-container": "#006875",
+              "on-error": "#490013",
+              "surface": "#0e0e0e",
+              "inverse-primary": "#bc005c",
+              "on-surface-variant": "#ababab",
+              "on-tertiary-fixed-variant": "#4500a9"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .prism-grid {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .mask-organic {
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+        #product-svg polygon {
+            transform-box: fill-box;
+            transform-origin: 50% 50%;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .shard-glow {
+            filter: drop-shadow(0 0 15px rgba(170, 138, 255, 0.4));
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-10deg); }
+            50% { transform: translateY(-20px) rotate(-8deg); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body selection:bg-tertiary/30 selection:text-tertiary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-20 bg-[#0e0e0e]/40 backdrop-blur-xl bg-gradient-to-b from-[#131313] to-transparent shadow-[0_0_15px_rgba(170,138,255,0.1)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#aa8aff] scale-95 active:scale-90 transition-transform cursor-pointer">menu</span>
+<h1 class="text-2xl font-headline font-bold tracking-[0.15em] text-[#aa8aff]">SYNTHETIC</h1>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex gap-6 font-headline tracking-[0.05em] uppercase text-sm">
+<a class="text-[#aa8aff] brightness-125 transition-all duration-300" href="#">EXPLORE</a>
+<a class="text-white/70 hover:text-[#aa8aff] transition-all duration-300" href="#">SYSTEMS</a>
+<a class="text-white/70 hover:text-[#aa8aff] transition-all duration-300" href="#">ARCHIVE</a>
+</nav>
+<span class="material-symbols-outlined text-[#aa8aff] scale-95 active:scale-90 transition-transform cursor-pointer">shopping_cart</span>
+</div>
+</header>
+<main class="relative pt-20 overflow-hidden min-h-screen">
+<!-- Background Elements -->
+<div class="absolute inset-0 prism-grid pointer-events-none"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-tertiary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<!-- Hero Section -->
+<section class="relative z-10 container mx-auto px-6 lg:px-12 pt-20 pb-32">
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="order-2 lg:order-1 space-y-8">
+<div class="space-y-2">
+<span class="block text-secondary font-label text-[10px] tracking-[0.3em] uppercase opacity-80">SPEC_03 // NEXT_GEN_CREATIVITY</span>
+<h2 class="text-6xl md:text-8xl font-headline font-bold text-on-surface tracking-tighter leading-none">
+                            iPad Pro
+                        </h2>
+</div>
+<p class="text-on-surface-variant text-lg md:text-xl max-w-md leading-relaxed font-light">
+                        La herramienta definitiva para la imaginación sin límites. Impulsada por la potencia del átomo.
+                    </p>
+<div class="pt-4">
+<button class="px-8 py-4 bg-gradient-to-r from-tertiary to-tertiary-container text-on-tertiary-container font-headline font-bold text-xs tracking-[0.2em] uppercase rounded-sm shadow-[0_0_25px_rgba(170,138,255,0.4)] hover:brightness-110 active:scale-95 transition-all duration-300">
+                            EXPLORAR PRODUCTO
+                        </button>
+</div>
+<!-- Data Fragments -->
+<div class="flex gap-12 pt-8 border-t border-white/5">
+<div>
+<span class="block text-[10px] font-label text-outline tracking-widest uppercase mb-1">DENSITY</span>
+<span class="text-secondary font-headline text-lg">5.1M_PX</span>
+</div>
+<div>
+<span class="block text-[10px] font-label text-outline tracking-widest uppercase mb-1">CORES</span>
+<span class="text-secondary font-headline text-lg">10_NODE</span>
+</div>
+<div>
+<span class="block text-[10px] font-label text-outline tracking-widest uppercase mb-1">REFRESH</span>
+<span class="text-secondary font-headline text-lg">120_HZ</span>
+</div>
+</div>
+</div>
+<!-- Redesigned Product Visual: Geometric Assembly -->
+<div class="order-1 lg:order-2 relative flex justify-center items-center h-[500px] lg:h-[700px]">
+<div class="relative w-full h-full flex items-center justify-center">
+<!-- Background Glow -->
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary/20 to-transparent blur-3xl rounded-full scale-75"></div>
+<!-- Geometric Sculpture Wrapper -->
+<div class="relative z-10 w-full max-w-lg animate-float">
+<svg class="w-full h-auto shard-glow filter drop-shadow-[0_0_50px_rgba(170,138,255,0.2)]" id="product-svg" viewbox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+<!-- Base Shards for Frame -->
+<polygon fill="rgba(170,138,255,0.05)" points="50,20 350,20 348,480 52,480" stroke="rgba(170,138,255,0.4)" stroke-width="0.5"></polygon>
+<!-- Complex Multi-layered Assembly (Simulating the style from Screen 5 / Text 4) -->
+<!-- Screen Layers -->
+<polygon fill="rgba(132,78,255,0.15)" points="65,35 200,35 200,250 65,250"></polygon>
+<polygon fill="rgba(170,138,255,0.1)" points="200,35 335,35 335,250 200,250"></polygon>
+<polygon fill="rgba(170,138,255,0.08)" points="65,250 200,250 200,465 65,465"></polygon>
+<polygon fill="rgba(132,78,255,0.12)" points="200,250 335,250 335,465 200,465"></polygon>
+<!-- Refraction Highlights / Prism shards -->
+<polygon fill="rgba(255,255,255,0.1)" points="65,35 150,35 65,120"></polygon>
+<polygon fill="rgba(255,255,255,0.05)" points="335,35 250,35 335,120"></polygon>
+<polygon fill="rgba(170,138,255,0.2)" points="65,465 150,465 65,380"></polygon>
+<polygon fill="rgba(0,227,253,0.1)" points="335,465 250,465 335,380"></polygon>
+<!-- Central Detail shards -->
+<polygon fill="rgba(170,138,255,0.3)" points="180,230 220,230 220,270 180,270"></polygon>
+<polygon fill="#fff" opacity="0.8" points="195,245 205,245 205,255 195,255"></polygon>
+<!-- Frame Edges shards -->
+<polygon fill="rgba(170,138,255,0.4)" points="50,20 60,20 60,480 50,480"></polygon>
+<polygon fill="rgba(132,78,255,0.3)" points="340,20 350,20 350,480 340,480"></polygon>
+<polygon fill="rgba(170,138,255,0.2)" points="50,20 350,20 350,30 50,30"></polygon>
+<polygon fill="rgba(132,78,255,0.4)" points="50,470 350,470 350,480 50,480"></polygon>
+<!-- Technical Overlays -->
+<path d="M70,50 L330,50 L330,450 L70,450 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4 4" stroke-width="1"></path>
+<circle cx="200" cy="30" fill="rgba(0,227,253,0.6)" r="2"></circle>
+</svg>
+<!-- Floating Labels around sculpture -->
+<div class="absolute -top-10 -left-10 bg-[#191919]/60 backdrop-blur-md p-2 border border-tertiary/20 hidden md:block">
+<p class="text-[8px] font-label tracking-widest text-tertiary uppercase">GEOMETRY_ENGINE_v4.2</p>
+</div>
+<div class="absolute -bottom-10 -right-10 bg-[#191919]/60 backdrop-blur-md p-2 border border-secondary/20 hidden md:block">
+<p class="text-[8px] font-label tracking-widest text-secondary uppercase">REFRACTION_INDEX: 1.45</p>
+</div>
+</div>
+<!-- Abstract Glass Overlays -->
+<div class="absolute top-0 right-10 w-32 h-32 bg-white/5 backdrop-blur-md mask-organic border border-white/10 z-20 hidden lg:block"></div>
+<div class="absolute bottom-10 left-10 w-24 h-24 bg-tertiary/5 backdrop-blur-xl mask-organic border border-tertiary/20 z-20 hidden lg:block"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Bento Grid -->
+<section class="relative z-10 container mx-auto px-6 lg:px-12 py-20">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: CHIP_M4 -->
+<div class="group relative overflow-hidden bg-[#191919]/60 backdrop-blur-2xl p-8 rounded-none border border-white/5 hover:border-tertiary/30 transition-all duration-500">
+<div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-tertiary text-4xl">memory</span>
+</div>
+<span class="block text-[10px] font-label text-tertiary tracking-[0.2em] mb-4">ENGINEERING_MODULE</span>
+<h3 class="text-3xl font-headline font-bold mb-4 tracking-tight">CHIP_M4</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Arquitectura de silicio de próxima generación para flujos de trabajo profesionales e IA integrada.</p>
+<div class="flex items-center gap-2 text-[10px] font-label text-secondary tracking-widest uppercase cursor-pointer group-hover:gap-4 transition-all">
+                        VER ESPECIFICACIONES <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<!-- Card 2: ULTRA_RETINA -->
+<div class="group relative overflow-hidden bg-[#191919]/60 backdrop-blur-2xl p-8 rounded-none border border-white/5 hover:border-secondary/30 transition-all duration-500">
+<div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-secondary text-4xl">layers</span>
+</div>
+<span class="block text-[10px] font-label text-secondary tracking-[0.2em] mb-4">VISUAL_INTERFACE</span>
+<h3 class="text-3xl font-headline font-bold mb-4 tracking-tight">ULTRA_RETINA</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">OLED en tándem que ofrece brillo extremo y una precisión de color sin precedentes en cada píxel.</p>
+<div class="flex items-center gap-2 text-[10px] font-label text-secondary tracking-widest uppercase cursor-pointer group-hover:gap-4 transition-all">
+                        MODO ÓPTICO <span class="material-symbols-outlined text-sm">visibility</span>
+</div>
+</div>
+<!-- Featured Card 3 (Visual) -->
+<div class="md:col-span-2 lg:col-span-1 relative h-64 lg:h-auto overflow-hidden rounded-none border border-white/5 group">
+<img alt="Pencil interaction" class="w-full h-full object-cover grayscale opacity-50 group-hover:scale-110 group-hover:opacity-70 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWr93LZrr7k0_EVRVEgSUNLWPOcTp--PwN-wRKfbTIu0sOo8F87S6KUROKmAqAcwHkS3FuKGYX-3wJl1M6AVyBGY8a0D4V6aPrRilmnFAp-4vqBMgrBtJH_fvvxU94-xNdIACkYlVsbo98OYBMQJ0O7zwVXHwq4KH9A9MuGxte6YYr52FVfmZGB_sxHIKCFngzjnUBkAoA_p-CxcYgXaVUORBV_-b7JRjsyaqrMaS_dxVY2367vIL6lEYSttsqjN1zGSpiu4j1h6s"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-8">
+<h4 class="text-xl font-headline font-bold">SYNERGY_FLOW</h4>
+<p class="text-xs text-on-surface-variant font-label tracking-wider">INPUT_LATENCY: 0.002ms</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Specs Detail -->
+<section class="container mx-auto px-6 lg:px-12 py-32 flex flex-col lg:flex-row gap-20 items-center">
+<div class="flex-1 relative order-2 lg:order-1">
+<div class="w-full aspect-video bg-surface-container-high rounded-none relative overflow-hidden border border-white/5">
+<img alt="Architecture Detail" class="w-full h-full object-cover opacity-40 mix-blend-screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5ZAJTDCBy2mUdNnvE8c8uuXq6I_g4cwWcdVXsLyW3B1wiZnvNzpazqLubzRdZCWIuKUzz9S2gAfQLrz76uSa5ZlXQUnM7XJ_RekgW4MQ5BP3FwhNnWsNUYI3QIpaGVORQH9TXbrK4B570bEVNeJ7UZHocAq518y_SCnxgmCOHSdBE8-MCQvZJkV_UlIft7DHZrlyDgsZIlrPWGg19HZ8JaAvkmxzAQsF98df8yA1uw-2w_L8QZOBIiTtNTL3KHyI9q0Duut7ClSo"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-3/4 h-3/4 border border-tertiary/20 flex flex-col items-center justify-center backdrop-blur-sm">
+<span class="text-tertiary font-headline text-5xl font-extrabold tracking-[0.2em]">THIN_TECH</span>
+<span class="text-[10px] font-label tracking-[0.5em] mt-2">5.1 MM DEPTH</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-6 order-1 lg:order-2">
+<h2 class="text-4xl font-headline font-bold uppercase tracking-widest text-secondary">Diseño de Precisión Atomizada</h2>
+<p class="text-on-surface-variant font-light leading-loose">
+                    Cada componente ha sido re-imaginado para ocupar el mínimo espacio posible. El nuevo iPad Pro no solo es más potente, es la expresión más pura de la tecnología portátil jamás creada por SYNTHETIC.
+                </p>
+<ul class="space-y-4 pt-4">
+<li class="flex items-center gap-4 text-xs font-label tracking-widest text-outline hover:text-on-surface transition-colors cursor-default">
+<span class="w-1.5 h-1.5 bg-tertiary"></span> 100% ALUMINIO RECICLADO
+                    </li>
+<li class="flex items-center gap-4 text-xs font-label tracking-widest text-outline hover:text-on-surface transition-colors cursor-default">
+<span class="w-1.5 h-1.5 bg-tertiary"></span> SISTEMA TÉRMICO DE GRAFITO
+                    </li>
+<li class="flex items-center gap-4 text-xs font-label tracking-widest text-outline hover:text-on-surface transition-colors cursor-default">
+<span class="w-1.5 h-1.5 bg-tertiary"></span> ARQUITECTURA DE SONIDO DE 4 ALTAVOCES
+                    </li>
+</ul>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full flex flex-col md:flex-row justify-between items-center gap-4 py-12 px-8 bg-[#000000] border-t border-white/5">
+<div class="flex flex-col gap-2">
+<span class="text-[#aa8aff] font-headline font-bold tracking-[0.15em]">SYNTHETIC CORP.</span>
+<p class="font-['Inter'] text-[10px] tracking-[0.15em] uppercase text-[#484848]">© 2024 SYNTHETIC CORP. ALL RIGHTS RESERVED.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[10px] tracking-[0.15em] uppercase text-[#484848] hover:text-[#ff89ab] transition-colors" href="#">PRIVACY_POLICY</a>
+<a class="font-['Inter'] text-[10px] tracking-[0.15em] uppercase text-[#484848] hover:text-[#ff89ab] transition-colors" href="#">TERMINAL_LOG</a>
+<a class="font-['Inter'] text-[10px] tracking-[0.15em] uppercase text-[#484848] hover:text-[#ff89ab] transition-colors" href="#">WARRANTY_v2.4</a>
+</div>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-safe">
+<div class="rounded-full mb-6 mx-auto w-fit px-6 py-3 bg-[#191919]/60 backdrop-blur-2xl border border-white/10 shadow-[0_0_40px_rgba(0,227,253,0.1)] flex items-center gap-6">
+<button class="text-[#00e3fd] bg-[#00e3fd]/10 rounded-full p-2 scale-110 duration-500 ease-out flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+</button>
+<button class="text-white/40 p-2 hover:text-[#ff89ab] hover:bg-white/5 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">memory</span>
+</button>
+<button class="text-white/40 p-2 hover:text-[#ff89ab] hover:bg-white/5 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">layers</span>
+</button>
+<button class="text-white/40 p-2 hover:text-[#ff89ab] hover:bg-white/5 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</nav>
+</body></html>

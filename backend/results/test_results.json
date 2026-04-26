@@ -1,0 +1,107 @@
+[
+    {
+        "store": "Hiraoka",
+        "title": "Sin título",
+        "price": 289.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:05:52.558333"
+    },
+    {
+        "store": "Hiraoka",
+        "title": "Sin título",
+        "price": 299.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:05:52.605183"
+    },
+    {
+        "store": "Hiraoka",
+        "title": "Sin título",
+        "price": 119.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:05:52.648158"
+    },
+    {
+        "store": "Hiraoka",
+        "title": "Sin título",
+        "price": 2999.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:05:52.692565"
+    },
+    {
+        "store": "Hiraoka",
+        "title": "Sin título",
+        "price": 69.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:05:52.736774"
+    },
+    {
+        "store": "Falabella",
+        "title": "Sin título",
+        "price": 0.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:06:04.171631"
+    },
+    {
+        "store": "Falabella",
+        "title": "Sin título",
+        "price": 0.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:06:04.204636"
+    },
+    {
+        "store": "Falabella",
+        "title": "Sin título",
+        "price": 0.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:06:04.232297"
+    },
+    {
+        "store": "Falabella",
+        "title": "Sin título",
+        "price": 0.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:06:04.263444"
+    },
+    {
+        "store": "Falabella",
+        "title": "Sin título",
+        "price": 0.0,
+        "url": "",
+        "timestamp": "2026-02-25T19:06:04.290967"
+    },
+    {
+        "store": "Ripley",
+        "title": "CONSOLA SONY PS5 PLAYSTATION 5 SLIM CON LECTORA DISCO 1TB",
+        "price": 3999.0,
+        "url": "https://simple.ripley.com.pe/consola-sony-ps5-playstation-5-slim-con-lectora-disco-1tb-pmp20000144160?cat=&pos=1&p=1&ps=48&sein=playstation%205%20slim",
+        "timestamp": "2026-02-25T19:06:11.490222"
+    },
+    {
+        "store": "Ripley",
+        "title": "CONSOLA SONY PS5 PLAYSTATION 5 SLIM",
+        "price": 2359.0,
+        "url": "https://simple.ripley.com.pe/consola-sony-ps5-playstation-5-slim-pmp20000188044?cat=&pos=2&p=1&ps=48&sein=playstation%205%20slim",
+        "timestamp": "2026-02-25T19:06:11.547347"
+    },
+    {
+        "store": "Ripley",
+        "title": "CONSOLA PLAYSTATION 5 SLIM DIGITAL + JUEGOS GT 7 + JUEGO ASTRO BOT",
+        "price": 2499.0,
+        "url": "https://simple.ripley.com.pe/consola-playstation-5-slim-digital-juegos-gt-7-juego-astro-bot-2031365707424p?cat=&pos=3&p=1&ps=48&sein=playstation%205%20slim",
+        "timestamp": "2026-02-25T19:06:11.605376"
+    },
+    {
+        "store": "Ripley",
+        "title": "CONSOLA PLAYSTATION 5 SLIM STANDARD + 2 JUEGOS GT 7 & ASTRO BOT",
+        "price": 2799.0,
+        "url": "https://simple.ripley.com.pe/consola-playstation-5-slim-standard-2-juegos-gt-7-and-astro-bot-2031362989144p?cat=&pos=4&p=1&ps=48&sein=playstation%205%20slim",
+        "timestamp": "2026-02-25T19:06:11.667924"
+    },
+    {
+        "store": "Ripley",
+        "title": "CONSOLA SONY - PLAYSTATION PS5 PLAYSTATION 5 SLIM LECTORA DISCOS",
+        "price": 2199.0,
+        "url": "https://simple.ripley.com.pe/consola-sony-playstation-ps5-playstation-5-slim-lectora-discos-pmp20000216462?cat=&pos=5&p=1&ps=48&sein=playstation%205%20slim",
+        "timestamp": "2026-02-25T19:06:11.719753"
+    }
+]

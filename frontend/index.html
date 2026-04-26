@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple & PS5 Market Research</title>
+    <!-- Fuentes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header Principal -->
+        <header class="main-header">
+            <div class="logo-area">
+                <h1>Market<span>Tracker</span></h1>
+                <p>Inteligencia de Precios PERU</p>
+            </div>
+            <div class="controls">
+                <span class="info" style="font-size: 0.8rem; color: #64748b;">(Auto-sync 3:33 AM)</span>
+            </div>
+        </header>
+
+        <!-- Filtros Rapidos y Ordenamiento -->
+        <section class="filters-section">
+            <div class="category-tabs" id="category-tabs">
+                <button class="tab-btn active" data-category="iPhone"
+                    onclick="app.filterCategory('iPhone')">iPhone</button>
+                <button class="tab-btn" data-category="iWatch" onclick="app.filterCategory('iWatch')">iWatch</button>
+                <button class="tab-btn" data-category="Macbook" onclick="app.filterCategory('Macbook')">Macbook</button>
+                <button class="tab-btn" data-category="iPad" onclick="app.filterCategory('iPad')">iPad</button>
+                <button class="tab-btn" data-category="PlayStation"
+                    onclick="app.filterCategory('PlayStation')">PS5</button>
+                <button class="tab-btn" data-category="Samsung" onclick="app.filterCategory('Samsung')">Samsung</button>
+                <button class="tab-btn" data-category="AirPods" onclick="app.filterCategory('AirPods')">AirPods</button>
+            </div>
+
+            <div class="settings-panel">
+                <div class="input-group">
+                    <label for="tipo-cambio">TC (USD a PEN):</label>
+                    <input type="number" id="tipo-cambio" value="3.35" step="0.01" onchange="app.updateTC()">
+                </div>
+                <div class="input-group">
+                    <label for="sort-order">Orden Precio:</label>
+                    <select id="sort-order" onchange="app.updateSort()">
+                        <option value="desc">Mayor a Menor ↓</option>
+                        <option value="asc">Menor a Mayor ↑</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contenedor Principal de la Tabla de Mercado -->
+        <main class="market-container">
+            <div class="table-card">
+                <table class="market-table" id="market-table">
+                    <thead>
+                        <tr>
+                            <th class="col-brief">Producto (Brief)</th>
+                            <th class="col-store">Tienda</th>
+                            <th class="col-price">Precio (S/.)</th>
+                            <th class="col-price-usd">Precio (USD)</th>
+                            <th class="col-link">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="market-body">
+                        <!-- Las filas se insertarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Estado de carga -->
+            <div class="loading-state" id="loading-state">
+                <div class="spinner"></div>
+                <p>Analizando precios del mercado peruano...</p>
+            </div>
+
+            <!-- Estado Vacío -->
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <p>No se encontraron resultados para esta categoría.</p>
+            </div>
+        </main>
+
+        <!-- Template Oculto para las tarjetas de producto -->
+        <template id="product-card-template">
+            <article class="product-card">
+                <div class="card-header">
+                    <span class="category-badge">Categoría</span>
+                    <h2 class="model-name">Nombre del Modelo</h2>
+                </div>
+
+                <div class="specs-container">
+                    <!-- Las especificaciones técnicas se insertarán dinámicamente aquí -->
+                </div>
+
+                <div class="price-actions">
+                    <div class="usa-input-area">
+                        <label for="wholesale-input">Ofrecen a ($):</label>
+                        <div class="input-wrapper">
+                            <span class="currency-prefix">$</span>
+                            <input type="number" class="wholesale-input" placeholder="0.00" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="peru-market-data">
+                    <h4>Precios en Perú (Ref)</h4>
+                    <div class="pe-summary">
+                        <span>Mínimo:</span> <strong class="pe-price">S/ ---</strong>
+                    </div>
+                    <ul class="pe-sources-list">
+                        <!-- Aquí van las fuentes de las tiendas como Mercado Libre -->
+                    </ul>
+                </div>
+
+                <!-- Footer de la tarjeta: Resultados y Ganancia -->
+                <div class="card-footer">
+                    <div class="margin-result">
+                        <span class="label">Ganancia Neta Est.</span>
+                        <span class="margin-amount">S/ ---</span>
+                    </div>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">ESPERANDO $</span>
+                    </div>
+                </div>
+            </article>
+        </template>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+2026-03-27 12:05: Cambio de estrategia a Motor de Partículas basado en Frank's Laboratory (Pixel Sampling).
+- Eliminación definitiva de Base64 para evitar errores de memoria/tokens.
+- Uso de archivos PNG externos (runner_*.png) para muestreo y renderizado.
+- Implementación de lógica de morphing ultra-fluida.

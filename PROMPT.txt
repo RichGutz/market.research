@@ -1,0 +1,99 @@
+
+MASTER PROMPT: Morphing Interactivo de Electrónicos
+Contexto:
+Estamos desarrollando un mini-sitio de venta de electrónicos premium (iPhone, MacBook, PS5, etc.). El estilo visual debe ser similar a "Species in Pieces- http://www.species-in-pieces.com/", utilizando polígonos de colores sólidos que se arman y desarman para formar cada producto.
+
+Objetivo Técnico:
+Generar el código (HTML, CSS y JavaScript) para una sección "Hero" donde un iPhone se arma al cargar la página y tiene un efecto de interacción con el mouse.
+
+Instrucciones para Gemini:
+
+Estructura SVG: Genera un código SVG simplificado para un iPhone compuesto por al menos 10 piezas independientes (paths) con IDs descriptivos (frame, screen, camera_1, camera_2, button, etc.). Usa coordenadas limpias.
+
+Estética CSS: - Aplica un fondo oscuro profundo (#0a0a0a).
+
+Define colores para los polígonos usando una paleta técnica (grises espaciales, azules profundos y el brillo de la pantalla).
+
+Asegura que el contenedor sea totalmente responsivo y esté centrado.
+
+Animación con GSAP 3:
+
+Entrada (Build-up): Crea una línea de tiempo (gsap.timeline) donde las piezas del iPhone vuelen desde fuera del canvas (u ocultas con escala 0) para ensamblarse con un efecto expo.out.
+
+Interactividad (Mouse Tracking): Implementa un listener de mousemove para que el grupo SVG completo rote levemente siguiendo al cursor, creando una sensación de profundidad 3D (paralaje).
+
+Efecto de Flotación: Añade una animación infinita sutil de "levitación" (yoyo: true) para que el objeto se sienta suspendido.
+
+Preparación para Morphing: Estructura el código de manera que sea fácil añadir una función posterior para transformar estos paths en los de una MacBook, manteniendo la consistencia de los IDs.
+
+
+MASTER PROMPT 2: El Morphing (iPhone a MacBook)
+Contexto:
+Ya tenemos el iPhone construido con polígonos. Ahora necesitamos la transición hacia el segundo producto: una MacBook. El efecto debe ser una "explosión controlada" donde las piezas del teléfono se expanden y se reorganizan para formar la laptop.
+
+Instrucciones para Gemini:
+
+Generación del Objetivo (MacBook):
+
+Genera un segundo grupo de paths SVG que representen una MacBook (pantalla abierta, teclado y base).
+
+Crucial: Asegúrate de que el número de piezas coincida con el del iPhone o usa el plugin MorphSVG de GSAP para gestionar la diferencia de puntos.
+
+Lógica de Transición:
+
+Crea una función llamada transitionToMacbook().
+
+Dentro de la función, usa gsap.to() para transformar cada ID del iPhone en su correspondiente ID de la MacBook.
+
+Añade un efecto de "caos intermedio": antes de encajar en su posición final, las piezas deben rotar y escalar ligeramente para que parezca que se están desarmando en el aire.
+
+Refinamiento Estético:
+
+Cambia sutilmente la iluminación (colores de los polígonos) durante la transición para reflejar el acabado metálico de la laptop.
+
+Control de Usuario:
+
+Añade un evento simple (puede ser un botón de "Siguiente" o que se active al hacer clic en el propio iPhone) para disparar esta transformación.
+
+Entrega el código necesario para integrar esta función en el proyecto anterior.
+
+Consejos para que quede de 10 con Antigravity:
+El "Easing": Cuando Gemini te dé el código, fíjate en la propiedad ease. Si quieres que se vea muy tecnológico, pídele que use ease: "expo.inOut". Si quieres que se sienta más orgánico, pide ease: "back.out(1.7)".
+
+Capas de Antigravity: Pídeles que te den los colores exactos en Hexadecimal de los acabados de las laptops que vendes (Space Gray, Silver, etc.) para que Gemini los incluya en el código del morphing.
+
+
+MASTER PROMPT 3: El Desafío Final (MacBook a PS5)
+Contexto:
+Hemos logrado la transición iPhone-MacBook. Ahora vamos por la pieza más compleja visualmente: la PlayStation 5. Al ser un objeto con curvas fluidas (el diseño "collar" de las placas blancas), el morphing debe sentirse más dinámico y tridimensional.
+
+Instrucciones para Gemini:
+
+Modelado Geométrico (PS5):
+
+Genera un conjunto de paths SVG que representen la PS5 en posición vertical.
+
+Divide el diseño en: dos placas laterales blancas curvas, el cuerpo central negro brillante y el resplandor azul de los LEDs.
+
+Transición de "Alta Complejidad":
+
+Crea la función transitionToPS5().
+
+Como la PS5 es más alta que la MacBook, aplica un stagger (desfase) en la animación: primero deben volar las piezas centrales y luego las placas blancas externas que "abrazan" el diseño.
+
+Implementa un cambio de color dinámico: los tonos metálicos de la laptop deben transicionar a un blanco puro y un azul neón brillante (#003791) para los detalles de luz.
+
+Efecto de Iluminación LED:
+
+Añade una animación de "pulso" (glow) a los polígonos que representan las luces azules de la consola usando un filtro de desenfoque (filter: blur) de CSS o una animación de opacidad infinita.
+
+Optimización de Curvas:
+
+Dado que la PS5 tiene curvas, instruye a GSAP para que use el atributo shapeIndex: "auto" en el plugin MorphSVG, asegurando que los puntos de la MacBook no se crucen de forma extraña al convertirse en curvas.
+
+Entrega el código necesario para cerrar este ciclo de animaciones.
+
+Recomendaciones para tu equipo "Dream Team":
+Para Antigravity: Diles que para la PS5 se enfoquen en el contraste. El blanco de las placas exteriores contra el negro del centro necesita sombras proyectadas (drop-shadows) para que el efecto "Species in Pieces" no se vea plano, sino con volumen.
+
+Para el Toque Final: Una vez que tengas las tres animaciones (iPhone -> MacBook -> PS5), pídele a Gemini que cree una función de retorno o "Loop" para que, al llegar a la PS5, el siguiente clic te devuelva al iPhone, cerrando el ciclo infinito de tu inventario.
