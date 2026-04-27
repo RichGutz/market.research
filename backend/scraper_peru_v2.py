@@ -367,6 +367,48 @@ class PeruMarketScraper:
             logger.error("No se puede iniciar el proceso sin Supabase.")
             return
 
+        logger.info("--- Iniciando Scraping basado en Catálogo ---")
+        try:
+            # Obtener el catálogo de Supabase
+            res = self.supabase.table("apple_ps5_catalog").select("*").execute()
+            catalog_items = res.data
+            
+            if not catalog_items:
+                logger.warning("El catálogo está vacío. Ejecute populate_db.py primero.")
+                return
+                
+            if limit_items:
+                catalog_items = catalog_items[:limit_items]
+                
+            for item in catalog_items:
+                item_id = item.get("id")
+                category = item.get("category")
+                model_name = item.get("model_name")
+                
+                logger.info(f">>> INICIANDO CATÁLOGO: {category} (Buscando: {model_name})")
+                
+                # Ejecutar scrapers en paralelo
+                tasks = [
+                    self.scrape_mercadolibre(model_name, category, max_items=5),
+                    self.scrape_ripley(model_name, category, max_items=5),
+                    self.scrape_hiraoka(model_name, category, max_items=5),
+                    self.scrape_ishop(model_name, category, max_items=5),
+                    self.scrape_novox(model_name, category, max_items=5)
+                ]
+                
+                all_results = await asyncio.gather(*tasks)
+                flat_results = [res for sublist in all_results for res in sublist]
+                
+                if flat_results:
+                    await self.save_to_supabase(item_id, category, flat_results)
+                    logger.info(f"Catálogo {model_name}: {len(flat_results)} resultados guardados.")
+                
+                await asyncio.sleep(2)
+                
+            logger.info("--- Scraping de Catálogo Finalizado con éxito ---")
+        except Exception as e:
+            logger.error(f"Error en el proceso de catálogo: {e}")
+
     async def run_market_scrapers(self):
         """Dispara las búsquedas generales por categoría (ej: "iPhone") barriendo el mercado sin restricciones del catálogo."""
         logger.info("--- Iniciando Sweep de Mercado Múltiple ---")
@@ -412,5 +454,5 @@ if __name__ == "__main__":
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
     
     scraper = PeruMarketScraper()
-    asyncio.run(scraper.run_market_scrapers())
+    asyncio.run(scraper.run_catalog_scrapers())
 
