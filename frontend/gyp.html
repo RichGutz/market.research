@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GyP Batch Manager</title>
+    <link rel="stylesheet" href="gyp.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Menu (Opcional, para simular navegación) -->
+        <nav class="sidebar">
+            <div class="logo">Market<span>Tracker</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Mercado (Scraper)</a></li>
+                <li class="active"><a href="gyp.html">Módulo GyP</a></li>
+            </ul>
+            <div class="user-info">
+                <span id="displayUser">rgutil@gmail.com</span>
+                <button id="logoutBtn" class="logout-btn">Salir</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h1>Gestión de Lotes (GyP)</h1>
+                    <p class="subtitle">Calculadora de Prorrateo y Ganancia Neta en USD</p>
+                </div>
+                <div class="header-actions">
+                    <div class="input-inline">
+                        <label>Fecha Lote:</label>
+                        <input type="date" id="inputDate">
+                        <span id="batchStatusBadge" class="badge badge-new">NUEVO</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="primary-btn" id="saveBatchBtn">Guardar Lote</button>
+                        <button class="danger-btn" id="closeBatchBtn">Cerrar Lote</button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                
+                <!-- Sección B: Productos (AHORA ARRIBA) -->
+                <section class="card products-section">
+                    <div class="section-header">
+                        <h2>Detalle de Productos</h2>
+                        <button class="secondary-btn" id="addProductBtn">+ Agregar Fila</button>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table" id="productsTable">
+                            <thead>
+                                <tr>
+                                    <th width="80px">Cant.</th>
+                                    <th>Descripción / Modelo</th>
+                                    <th width="140px">Venta ($)</th>
+                                    <th width="140px">Compra USA ($)</th>
+                                    <th width="140px">Prorrateo ($)</th>
+                                    <th width="140px">Ganancia Neta ($)</th>
+                                    <th width="50px"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsBody">
+                                <!-- Filas dinámicas -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" class="text-right font-bold">TOTALES DEL LOTE:</td>
+                                    <td class="font-bold" id="totalSaleUSD">$ 0.00</td>
+                                    <td class="font-bold" id="totalPurchaseUSA">$ 0.00</td>
+                                    <td class="font-bold" id="totalProrated">$ 0.00</td>
+                                    <td class="font-bold highlight-green" id="totalNetProfit">$ 0.00</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Sección A: Costos Indirectos (AHORA ABAJO) -->
+                <section class="card costs-section">
+                    <h2>Costos Indirectos (USD)</h2>
+                    <div class="costs-grid">
+                        <div class="input-group">
+                            <label>Courier</label>
+                            <input type="number" class="cost-input" id="costCourier" value="0" step="0.01">
+                            <textarea class="cost-note" id="noteCourier" placeholder="Nota (Opcional)..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Transf. Dinero</label>
+                            <input type="number" class="cost-input" id="costTransfer" value="0" step="0.01">
+                            <textarea class="cost-note" id="noteTransfer" placeholder="Nota (Opcional)..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Pasajes (Airfare)</label>
+                            <input type="number" class="cost-input" id="costAirfare" value="0" step="0.01">
+                            <textarea class="cost-note" id="noteAirfare" placeholder="Nota (Opcional)..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Alimentación</label>
+                            <input type="number" class="cost-input" id="costFood" value="0" step="0.01">
+                            <textarea class="cost-note" id="noteFood" placeholder="Nota (Opcional)..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Transporte</label>
+                            <input type="number" class="cost-input" id="costTransport" value="0" step="0.01">
+                            <textarea class="cost-note" id="noteTransport" placeholder="Nota (Opcional)..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Publicidad</label>
+                            <input type="number" class="cost-input" id="costAds" value="0" step="0.01">
+                            <textarea class="cost-note" id="noteAds" placeholder="Nota (Opcional)..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Otros Costos</label>
+                            <input type="number" class="cost-input" id="costOther" value="0" step="0.01">
+                            <textarea class="cost-note" id="noteOther" placeholder="Nota (Opcional)..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="total-box">
+                        <span>TOTAL COSTOS INDIRECTOS:</span>
+                        <span class="total-value" id="totalIndirectCosts">$ 0.00</span>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Template para la fila -->
+    <template id="rowTemplate">
+        <tr class="product-row">
+            <td><input type="number" class="row-qty" value="1" min="1"></td>
+            <td><select class="row-desc"><option value="" disabled selected>Seleccione Modelo...</option></select></td>
+            <td><input type="number" class="row-sell-usd" value="0" step="0.01"></td>
+            <td><input type="number" class="row-buy-usa" value="0" step="0.01"></td>
+            <td class="row-prorated readonly">$ 0.00</td>
+            <td class="row-profit readonly">$ 0.00</td>
+            <td><button class="delete-btn" title="Eliminar fila">✕</button></td>
+        </tr>
+    </template>
+
+    <script src="gyp.js"></script>
+</body>
+</html>
