@@ -46,7 +46,7 @@ def populate():
         {"category": "PlayStation", "model_name": "PlayStation 5 Pro", "target_usa_price": 699.00, "specs": {"tipo": "Pro", "memoria": "2TB", "GPU": "Aumentada"}},
 
         # --- SAMSUNG ---
-        {"category": "Samsung", "model_name": "Samsung Galaxy S25 Ultra 512GB", "target_usa_price": 1199.00, "specs": {"procesador": "SD 8 Gen 4", "pantalla": "6.8 2X"}},
+        {"category": "Samsung", "model_name": "Samsung Galaxy S26 Ultra 256GB", "target_usa_price": 1199.00, "specs": {"procesador": "SD 8 Gen 5", "pantalla": "6.8 2X"}},
         {"category": "Samsung", "model_name": "Samsung Galaxy S26 Ultra 512GB", "target_usa_price": 1299.00, "specs": {"procesador": "SD 8 Gen 5", "pantalla": "6.8 2X"}},
 
         # --- AIRPODS ---

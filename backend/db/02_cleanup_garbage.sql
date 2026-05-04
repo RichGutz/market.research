@@ -25,7 +25,7 @@ DELETE FROM public.prices_macbook WHERE NOT (scraped_title ~* 'Macbook|Mac Book|
 DELETE FROM public.prices_iwatch WHERE NOT (scraped_title ~* 'Watch|iWatch|Ultra|Series');
 DELETE FROM public.prices_ipad WHERE NOT (scraped_title ~* 'iPad');
 DELETE FROM public.prices_playstation WHERE NOT (scraped_title ~* 'PlayStation|PS5');
-DELETE FROM public.prices_samsung WHERE NOT (scraped_title ~* 'Samsung|Galaxy|S25|S26');
+DELETE FROM public.prices_samsung WHERE NOT (scraped_title ~* 'Samsung|Galaxy|S26');
 
 -- LOG de limpieza
 SELECT 'Limpieza completada. Datos basura eliminados de todas las tablas de precios.' as status;

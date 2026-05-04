@@ -44,7 +44,7 @@ CLEANUP_CONFIG = {
     "prices_samsung": {
         "forbidden": r'funda|case|correa|strap|mica|protector|vidrio|templado|repuesto|cargador|cable',
         "floor": 1500,
-        "must_have": "Samsung|Galaxy|S25|S26"
+        "must_have": "Samsung|Galaxy|S26"
     }
 }
 

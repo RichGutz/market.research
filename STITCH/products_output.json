@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "C:\Users\rguti\Tienda.APPLE.PS5\Market.Research\STITCH\gen_products_recognizable.py", line 497, in <module>
-    gen_watch(),
-    ^^^^^^^^^^^
-  File "C:\Users\rguti\Tienda.APPLE.PS5\Market.Research\STITCH\gen_products_recognizable.py", line 340, in gen_watch
-    "vb": "0 0 260 320", "ww": 160, wh: 310,
-                                    ^^
-NameError: name 'wh' is not defined
