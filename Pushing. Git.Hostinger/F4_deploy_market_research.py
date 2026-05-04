@@ -21,8 +21,11 @@ def ssh_run(client, cmd, label=""):
     if label:
         print(f"\n[{label}]")
     stdin, stdout, stderr = client.exec_command(cmd)
-    out = stdout.read().decode("utf-8", errors="ignore")
-    err = stderr.read().decode("utf-8", errors="ignore")
+    out = stdout.read().decode("utf-8", errors="replace")
+    err = stderr.read().decode("utf-8", errors="replace")
+    # Sanitize for Windows console (remove non-ascii safely)
+    out = out.encode("ascii", errors="replace").decode("ascii")
+    err = err.encode("ascii", errors="replace").decode("ascii")
     if out.strip():
         print(f" >> {out.strip()[:500]}")
     if err.strip():
@@ -42,6 +45,13 @@ def deploy():
             f"else git clone {REPO_URL} {APP_DIR}; fi"
         )
         ssh_run(client, git_cmd, "1. Sincronizando Repositorio Git")
+
+        # 1b. Limpiar configs nginx conflictivas previas de este dominio
+        cleanup_cmd = (
+            f"grep -rl '{DOMAIN}' /etc/nginx/sites-enabled/ | "
+            f"grep -v '{SERVICE_NAME}' | xargs rm -f || true"
+        )
+        ssh_run(client, cleanup_cmd, "1b. Limpiando configs Nginx conflictivas")
 
         # 2. Configurar Nginx para Market Research
         nginx_cfg = f"""server {{
