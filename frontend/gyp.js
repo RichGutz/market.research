@@ -18,7 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalIndirectCostsEl = document.getElementById('totalIndirectCosts');
     const productsBody = document.getElementById('productsBody');
     const addProductBtn = document.getElementById('addProductBtn');
-    const rowTemplate = document.getElementById('rowTemplate');
+        const rowTemplate = document.getElementById('rowTemplate');
+    
+    // Configuración API
+    const API_BASE_URL = window.location.origin.includes('localhost') ? 'http://localhost:8000' : '/api';
+
     
     // Totales de la tabla
     const totalPurchaseUSAEl = document.getElementById('totalPurchaseUSA');
@@ -195,6 +199,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 6. CICLO DE VIDA DEL LOTE (PERSISTENCIA Y ESTADOS) ---
 
+    function fillFormData(data) {
+        // Cargar Costos
+        const c = data.costs;
+        document.getElementById('costCourier').value = c.courier.val; document.getElementById('noteCourier').value = c.courier.note;
+        document.getElementById('costTransfer').value = c.transfer.val; document.getElementById('noteTransfer').value = c.transfer.note;
+        document.getElementById('costAirfare').value = c.airfare.val; document.getElementById('noteAirfare').value = c.airfare.note;
+        document.getElementById('costFood').value = c.food.val; document.getElementById('noteFood').value = c.food.note;
+        document.getElementById('costTransport').value = c.transport.val; document.getElementById('noteTransport').value = c.transport.note;
+        document.getElementById('costAds').value = c.ads.val; document.getElementById('noteAds').value = c.ads.note;
+        document.getElementById('costOther').value = c.other.val; document.getElementById('noteOther').value = c.other.note;
+
+        // Cargar Productos
+        productsBody.innerHTML = ''; 
+        if (data.products && data.products.length > 0) {
+            data.products.forEach(p => {
+                addProductBtn.click();
+                const lastRow = productsBody.lastElementChild;
+                lastRow.querySelector('.row-qty').value = p.qty;
+                lastRow.querySelector('.row-desc').value = p.desc;
+                lastRow.querySelector('.row-buy-usa').value = p.buyUSA;
+                lastRow.querySelector('.row-sell-usd').value = p.sellUSD;
+            });
+        } else {
+            addProductBtn.click();
+        }
+    }
+
     function setUIState(status) {
         currentStatus = status;
         badgeEl.textContent = status;
@@ -260,55 +291,80 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    function saveBatch(status) {
-        const dateKey = 'gyp_batch_' + inputDateEl.value;
+    async function saveBatch(status) {
         const data = getFormDataJSON(status);
-        localStorage.setItem(dateKey, JSON.stringify(data));
-        isDirty = false;
-        setUIState(status);
-        alert(`Lote ${status === 'CERRADO' ? 'CERRADO' : 'GUARDADO'} exitosamente para la fecha: ${inputDateEl.value}`);
-    }
-
-    function loadBatch(dateStr) {
-        const dateKey = 'gyp_batch_' + dateStr;
-        const dataStr = localStorage.getItem(dateKey);
+        const saveBtn = document.getElementById('saveBatchBtn');
+        const closeBtn = document.getElementById('closeBatchBtn');
         
-        productsBody.innerHTML = ''; // Limpiar filas
+        const originalSaveText = saveBtn.textContent;
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Guardando...';
 
-        if (dataStr) {
-            const data = JSON.parse(dataStr);
-            
-            // Cargar Costos
-            const c = data.costs;
-            document.getElementById('costCourier').value = c.courier.val; document.getElementById('noteCourier').value = c.courier.note;
-            document.getElementById('costTransfer').value = c.transfer.val; document.getElementById('noteTransfer').value = c.transfer.note;
-            document.getElementById('costAirfare').value = c.airfare.val; document.getElementById('noteAirfare').value = c.airfare.note;
-            document.getElementById('costFood').value = c.food.val; document.getElementById('noteFood').value = c.food.note;
-            document.getElementById('costTransport').value = c.transport.val; document.getElementById('noteTransport').value = c.transport.note;
-            document.getElementById('costAds').value = c.ads.val; document.getElementById('noteAds').value = c.ads.note;
-            document.getElementById('costOther').value = c.other.val; document.getElementById('noteOther').value = c.other.note;
-
-            // Cargar Productos
-            data.products.forEach(p => {
-                addProductBtn.click();
-                const lastRow = productsBody.lastElementChild;
-                lastRow.querySelector('.row-qty').value = p.qty;
-                lastRow.querySelector('.row-desc').value = p.desc;
-                lastRow.querySelector('.row-buy-usa').value = p.buyUSA;
-                lastRow.querySelector('.row-sell-usd').value = p.sellUSD;
+        try {
+            const response = await fetch(`${API_BASE_URL}/gyp/save`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
             });
 
-            setUIState(data.status);
-        } else {
-            // Reset to new state
-            costInputs.forEach(i => i.value = "0");
-            document.querySelectorAll('.cost-note').forEach(i => i.value = "");
-            addProductBtn.click();
+            if (!response.ok) throw new Error('Error en la respuesta del servidor');
+
+            isDirty = false;
+            setUIState(status);
+            alert(`Lote ${status === 'CERRADO' ? 'CERRADO' : 'GUARDADO'} exitosamente en la nube para la fecha: ${inputDateEl.value}`);
+        } catch (error) {
+            console.error('Error salvando lote:', error);
+            alert('Error crítico: No se pudo guardar en Supabase. Verifica tu conexión.');
+        } finally {
+            saveBtn.disabled = false;
+            saveBtn.textContent = originalSaveText;
+        }
+    }
+
+    async function loadBatch(dateStr) {
+        productsBody.innerHTML = ''; // Limpiar filas
+        const loadingMsg = document.createElement('tr');
+        loadingMsg.innerHTML = '<td colspan="7" style="text-align:center; padding: 20px;">Cargando datos desde la nube...</td>';
+        productsBody.appendChild(loadingMsg);
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/gyp/load/${dateStr}`);
+            const result = await response.json();
+            
+            productsBody.innerHTML = ''; // Limpiar mensaje de carga
+
+            if (result.status === 'success') {
+                const data = result.data;
+                fillFormData(data);
+                setUIState(data.status);
+            } else {
+                // MIGRACIÓN: Si no hay en nube, buscar en localStorage antiguo
+                const localDataStr = localStorage.getItem('gyp_batch_' + dateStr);
+                if (localDataStr) {
+                    if (confirm(`Encontramos datos locales de "${dateStr}" en esta computadora. ¿Deseas recuperarlos y subirlos a la nube?`)) {
+                        const localData = JSON.parse(localDataStr);
+                        fillFormData(localData);
+                        setUIState(localData.status || 'EN PROCESO');
+                        markDirty(); // Forzar estado sucio para que el usuario pueda darle a Guardar
+                        alert("Datos locales cargados. Presiona 'GUARDAR LOTE' para sincronizarlos con la nube definitivamente.");
+                        return;
+                    }
+                }
+
+                // No existe lote en ningún lado, reset a nuevo
+                costInputs.forEach(i => i.value = "0");
+                document.querySelectorAll('.cost-note').forEach(i => i.value = "");
+                addProductBtn.click();
+                setUIState('NUEVO');
+            }
+        } catch (error) {
+            console.error('Error cargando lote:', error);
+            productsBody.innerHTML = '<td colspan="7" style="text-align:center; color: var(--danger); padding: 20px;">Error al conectar con la base de datos.</td>';
             setUIState('NUEVO');
         }
         
         calculateGyP();
-        isDirty = false; // Reset dirty flag after loading
+        isDirty = false;
     }
 
     // Inicializar app
