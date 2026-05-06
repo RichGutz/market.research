@@ -35,80 +35,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Lógica de Cálculos (Prorrateo y Ganancia)
     function calculateGyP() {
-        // a. Sumar costos indirectos totales
+        // a. Sumar costos indirectos
         let totalIndirect = 0;
         costInputs.forEach(input => {
             totalIndirect += parseFloat(input.value) || 0;
         });
         totalIndirectCostsEl.textContent = `$ ${totalIndirect.toFixed(2)}`;
 
+        // b. Calcular Costo Total de Compra USA para el prorrateo
         const rows = productsBody.querySelectorAll('.product-row');
+        let totalPurchaseUSA = 0;
         
-        // b. Primer pase: Calcular el Costo Total de Compra del Lote (solo filas con qty > 0)
-        let totalBatchPurchaseUSA = 0;
         rows.forEach(row => {
             const qty = parseFloat(row.querySelector('.row-qty').value) || 0;
             const buyUSA = parseFloat(row.querySelector('.row-buy-usa').value) || 0;
-            if (qty > 0) {
-                totalBatchPurchaseUSA += (qty * buyUSA);
-            }
+            totalPurchaseUSA += (qty * buyUSA);
         });
 
-        // c. Segundo pase: Calcular cada fila y acumular totales reales
-        let sumTotalSaleUSD = 0;
-        let sumTotalPurchaseUSA = 0;
-        let sumTotalProrated = 0;
-        let sumTotalNetProfit = 0;
+        let sumSaleUSD = 0;
+        let sumProrated = 0;
+        let sumProfit = 0;
 
+        // c. Calcular cada fila
         rows.forEach(row => {
             const qty = parseFloat(row.querySelector('.row-qty').value) || 0;
             const buyUSA = parseFloat(row.querySelector('.row-buy-usa').value) || 0;
             const sellUSD = parseFloat(row.querySelector('.row-sell-usd').value) || 0;
             
             const rowTotalBuyUSA = qty * buyUSA;
-            const rowTotalSellUSD = qty * sellUSD;
             
-            // Prorrateo proporcional al valor de la fila sobre el total del lote
+            // Prorrateo: (Costo USA Fila / Costo USA Total Lote) * Total Costos Indirectos
             let prorated = 0;
-            if (totalBatchPurchaseUSA > 0 && qty > 0) {
-                prorated = (rowTotalBuyUSA / totalBatchPurchaseUSA) * totalIndirect;
+            if (totalPurchaseUSA > 0) {
+                prorated = (rowTotalBuyUSA / totalPurchaseUSA) * totalIndirect;
             }
             
-            // Ganancia Neta de la Fila
+            // Ganancia Neta USD: Venta USD Totales - Compra USA Totales - Prorrateo
+            const rowTotalSellUSD = qty * sellUSD;
             const profit = rowTotalSellUSD - rowTotalBuyUSA - prorated;
 
-            // Actualizar UI de la fila
+            // Actualizar UI de la fila (Valores por UNIDAD o TOTAL fila? En este caso mostramos el Total de la Fila)
             row.querySelector('.row-prorated').textContent = `$ ${prorated.toFixed(2)}`;
             row.querySelector('.row-profit').textContent = `$ ${profit.toFixed(2)}`;
-            row.querySelector('.row-profit').style.color = profit >= 0 ? 'var(--highlight-green)' : 'var(--danger)';
             
-            // Resaltar si la cantidad es 0 para advertir al usuario
-            row.style.opacity = qty <= 0 ? '0.5' : '1';
-            if (qty <= 0 && (buyUSA > 0 || sellUSD > 0)) {
-                row.querySelector('.row-qty').style.border = '1px solid var(--danger)';
-            } else {
-                row.querySelector('.row-qty').style.border = '1px solid var(--border)';
-            }
+            // Colores para ganancia
+            row.querySelector('.row-profit').style.color = profit >= 0 ? 'var(--highlight-green)' : 'var(--danger)';
 
-            // Acumular para los totales del pie de tabla
-            sumTotalSaleUSD += rowTotalSellUSD;
-            sumTotalPurchaseUSA += rowTotalBuyUSA;
-            sumTotalProrated += prorated;
-            sumTotalNetProfit += profit;
+            sumSaleUSD += rowTotalSellUSD;
+            sumProrated += prorated;
+            sumProfit += profit;
         });
 
-        // d. Actualizar Totales Finales (Pie de Tabla)
-        // Usamos las sumas acumuladas para garantizar que coincidan con lo que el usuario ve en cada fila
-        totalPurchaseUSAEl.textContent = `$ ${sumTotalPurchaseUSA.toFixed(2)}`;
-        totalSaleUSDEl.textContent = `$ ${sumTotalSaleUSD.toFixed(2)}`;
-        totalProratedEl.textContent = `$ ${sumTotalProrated.toFixed(2)}`;
-        totalNetProfitEl.textContent = `$ ${sumTotalNetProfit.toFixed(2)}`;
-        totalNetProfitEl.style.color = sumTotalNetProfit >= 0 ? 'var(--highlight-green)' : 'var(--danger)';
-        
-        // Validación de cuadre: El total prorrateado debe ser igual al total indirecto (permitiendo pequeño margen de redondeo)
-        if (Math.abs(sumTotalProrated - totalIndirect) > 0.05 && sumTotalPurchaseUSA > 0) {
-            console.warn("Discrepancia en el prorrateo detectada:", sumTotalProrated, "vs", totalIndirect);
-        }
+        // d. Actualizar Totales Finales
+        totalPurchaseUSAEl.textContent = `$ ${totalPurchaseUSA.toFixed(2)}`;
+        totalSaleUSDEl.textContent = `$ ${sumSaleUSD.toFixed(2)}`;
+        totalProratedEl.textContent = `$ ${sumProrated.toFixed(2)}`;
+        totalNetProfitEl.textContent = `$ ${sumProfit.toFixed(2)}`;
+        totalNetProfitEl.style.color = sumProfit >= 0 ? 'var(--highlight-green)' : 'var(--danger)';
     }
 
     // 4. Catálogo de Productos (Igual que en backend/populate_db.py)
