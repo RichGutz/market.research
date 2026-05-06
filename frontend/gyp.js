@@ -324,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadBatch(dateStr) {
         productsBody.innerHTML = ''; // Limpiar filas
         const loadingMsg = document.createElement('tr');
+        loadingMsg.id = "loading-row";
         loadingMsg.innerHTML = '<td colspan="7" style="text-align:center; padding: 20px;">Cargando datos desde la nube...</td>';
         productsBody.appendChild(loadingMsg);
 
@@ -335,36 +336,88 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (result.status === 'success') {
                 const data = result.data;
-                fillFormData(data);
-                setUIState(data.status);
-            } else {
-                // MIGRACIÓN: Si no hay en nube, buscar en localStorage antiguo
-                const localDataStr = localStorage.getItem('gyp_batch_' + dateStr);
-                if (localDataStr) {
-                    if (confirm(`Encontramos datos locales de "${dateStr}" en esta computadora. ¿Deseas recuperarlos y subirlos a la nube?`)) {
-                        const localData = JSON.parse(localDataStr);
-                        fillFormData(localData);
-                        setUIState(localData.status || 'EN PROCESO');
-                        markDirty(); // Forzar estado sucio para que el usuario pueda darle a Guardar
-                        alert("Datos locales cargados. Presiona 'GUARDAR LOTE' para sincronizarlos con la nube definitivamente.");
-                        return;
-                    }
+                
+                // 1. Cargar Costos Indirectos
+                const c = data.costs;
+                document.getElementById('costCourier').value = c.courier.val;
+                document.getElementById('noteCourier').value = c.courier.note;
+                document.getElementById('costTransfer').value = c.transfer.val;
+                document.getElementById('noteTransfer').value = c.transfer.note;
+                document.getElementById('costAirfare').value = c.airfare.val;
+                document.getElementById('noteAirfare').value = c.airfare.note;
+                document.getElementById('costFood').value = c.food.val;
+                document.getElementById('noteFood').value = c.food.note;
+                document.getElementById('costTransport').value = c.transport.val;
+                document.getElementById('noteTransport').value = c.transport.note;
+                document.getElementById('costAds').value = c.ads.val;
+                document.getElementById('noteAds').value = c.ads.note;
+                document.getElementById('costOther').value = c.other.val;
+                document.getElementById('noteOther').value = c.other.note;
+
+                // 2. Cargar Productos (sin disparar el cálculo en cada clic)
+                if (data.products && data.products.length > 0) {
+                    data.products.forEach(p => {
+                        // Función interna para añadir fila sin calcular todavía
+                        const row = createProductRow();
+                        row.querySelector('.row-qty').value = p.qty;
+                        row.querySelector('.row-desc').value = p.desc;
+                        row.querySelector('.row-buy-usa').value = p.buyUSA;
+                        row.querySelector('.row-sell-usd').value = p.sellUSD;
+                        productsBody.appendChild(row);
+                    });
+                } else {
+                    productsBody.appendChild(createProductRow());
                 }
 
-                // No existe lote en ningún lado, reset a nuevo
-                costInputs.forEach(i => i.value = "0");
-                document.querySelectorAll('.cost-note').forEach(i => i.value = "");
-                addProductBtn.click();
-                setUIState('NUEVO');
+                setUIState(data.status);
+            } else {
+                // MIGRACIÓN / NUEVO LOTE
+                const localDataStr = localStorage.getItem('gyp_batch_' + dateStr);
+                if (localDataStr) {
+                    if (confirm(`Encontramos datos locales de "${dateStr}". ¿Recuperar?`)) {
+                        const localData = JSON.parse(localDataStr);
+                        // Aplicar lógica similar de carga manual
+                        fillFormData(localData); 
+                        setUIState(localData.status || 'EN PROCESO');
+                    }
+                } else {
+                    costInputs.forEach(i => i.value = "0");
+                    productsBody.appendChild(createProductRow());
+                    setUIState('NUEVO');
+                }
             }
         } catch (error) {
             console.error('Error cargando lote:', error);
-            productsBody.innerHTML = '<td colspan="7" style="text-align:center; color: var(--danger); padding: 20px;">Error al conectar con la base de datos.</td>';
-            setUIState('NUEVO');
+            productsBody.innerHTML = '<td colspan="7" style="text-align:center; color: var(--danger); padding: 20px;">Error de conexión.</td>';
         }
         
+        // CÁLCULO FINAL: Una sola vez después de cargar todo
         calculateGyP();
         isDirty = false;
+    }
+
+    // Función auxiliar para crear filas
+    function createProductRow() {
+        const clone = rowTemplate.content.cloneNode(true);
+        const row = clone.querySelector('.product-row');
+        
+        // Llenar catálogo
+        const select = row.querySelector('.row-desc');
+        const categories = [...new Set(catalogItems.map(i => i.category))];
+        categories.forEach(cat => {
+            const optgroup = document.createElement('optgroup');
+            optgroup.label = cat;
+            catalogItems.filter(i => i.category === cat).forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.name;
+                opt.textContent = item.name;
+                optgroup.appendChild(opt);
+            });
+            select.appendChild(optgroup);
+        });
+
+        addRowListeners(row);
+        return row;
     }
 
     // Inicializar app
